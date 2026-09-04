@@ -273,6 +273,47 @@ body.menu-locked{overflow:hidden}
 .story-toggle:hover{background:var(--teal);border-color:var(--teal);color:#fff}
 @media (min-width:1024px){.about-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4rem}.about-panel{min-height:560px;order:2}.story-body{order:1}}
 
+/* ============ FOUNDER VIDEO (60-second, in his own words) ============ */
+.founder-video{background:var(--tint)}
+.fv-cols{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center;justify-items:center}
+.fv-media{width:min(300px,100%);display:flex;flex-direction:column;align-items:center}
+.fv-frame{
+  position:relative;width:100%;display:block;
+  aspect-ratio:9/16;
+  border-radius:16px;overflow:hidden;
+  background:#000;text-decoration:none;
+  box-shadow:0 18px 40px rgba(15,12,10,.22);
+  border:1px solid var(--sand);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.fv-frame:hover,.fv-frame:focus-visible{transform:translateY(-2px);box-shadow:0 22px 48px rgba(15,12,10,.3)}
+.fv-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.fv-play{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:72px;height:52px;pointer-events:none;
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,.45));
+  transition:transform .2s ease;
+}
+.fv-frame:hover .fv-play,.fv-frame:focus-visible .fv-play{transform:translate(-50%,-50%) scale(1.08)}
+.fv-play svg{width:100%;height:100%;display:block}
+.fv-play-bg{fill:#212121;opacity:.9;transition:fill .18s ease,opacity .18s ease}
+.fv-frame:hover .fv-play-bg,.fv-frame:focus-visible .fv-play-bg{fill:#e11d1d;opacity:1}
+.fv-play-tri{fill:#fff}
+.fv-btn{margin-top:1.15rem;align-self:center}
+.fv-copy{text-align:center;max-width:52ch}
+.fv-copy .eyebrow{margin-bottom:1.1rem}
+.fv-pull{
+  font-family:'Lora',serif;font-style:italic;
+  font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.35;
+  color:var(--espresso);letter-spacing:-.01em;
+}
+.fv-note{color:var(--slate-2);margin-top:1rem;font-size:.95rem;line-height:1.55}
+@media (min-width:820px){
+  .fv-cols{grid-template-columns:280px minmax(0,1fr);gap:3.5rem;justify-items:start;align-items:center}
+  .fv-media{width:280px}
+  .fv-copy{text-align:left}
+}
+
 /* ============ METHOD — bento ============ */
 .method{background:var(--tint)}
 .bento{display:grid;grid-template-columns:1fr;gap:1rem}
@@ -502,7 +543,7 @@ body.menu-locked{overflow:hidden}
 }
 .offer-name{
   position:relative;z-index:2;
-  font-size:2.5rem;
+  font-size:2.2rem;
   font-weight:500;letter-spacing:-.015em;line-height:1.1;
   color:#fff;text-align:center;
   text-shadow:0 2px 22px rgba(0,0,0,.75), 0 1px 4px rgba(0,0,0,.6);
@@ -523,7 +564,7 @@ body.menu-locked{overflow:hidden}
 .offer .desc{font-size:.97rem;color:var(--slate);margin:0}
 .offer ul{list-style:none;margin:1.2rem 0;padding:0;display:grid;gap:.7rem}
 .offer li{position:relative;padding-left:1.5rem;font-size:.97rem;color:var(--slate)}
-.offer li::before{content:"—";position:absolute;left:0;color:var(--brass);font-weight:700}
+.offer li::before{content:"✓";position:absolute;left:0;color:var(--brass);font-weight:700}
 .offer .for{font-size:.95rem;font-style:italic;color:var(--slate-2);margin:0 0 1.1rem}
 .offer .price{margin-top:auto;padding-top:1.1rem;border-top:1px solid var(--sand);color:var(--brass);font-weight:700;line-height:1.45}
 .offers-close{margin-top:2.4rem;max-width:66ch;color:var(--slate)}
@@ -946,6 +987,31 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     </div>
   </section>
 
+  <!-- ============ FOUNDER VIDEO (bridge from personal story to the method) ============ -->
+  <section class="section founder-video" aria-label="Kevin Smith, in his own words">
+    <div class="wrap section-inner">
+      <div class="fv-cols">
+        <div class="fv-media">
+          <a class="fv-frame" href="https://youtube.com/shorts/cXB4joHuqvE" target="_blank" rel="noopener" aria-label="Watch Kevin Smith on YouTube (opens in a new tab)">
+            <img src="https://dashboard.katalyst-crm.com/files/t1/Ekran%20Resmi%202026-09-04%2009.55.25.png" alt="Kevin Smith &mdash; Steady Bridge Consulting" loading="lazy">
+            <span class="fv-play" aria-hidden="true">
+              <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+                <path class="fv-play-bg" d="M66.52 7.74a8.5 8.5 0 0 0-5.98-6C55.35.5 34 .5 34 .5s-21.35 0-26.54 1.24a8.5 8.5 0 0 0-5.98 6C.24 12.93.24 24 .24 24s0 11.07 1.24 16.26a8.5 8.5 0 0 0 5.98 6C12.65 47.5 34 47.5 34 47.5s21.35 0 26.54-1.24a8.5 8.5 0 0 0 5.98-6C67.76 35.07 67.76 24 67.76 24s0-11.07-1.24-16.26z"/>
+                <polygon class="fv-play-tri" points="27,34 45,24 27,14"/>
+              </svg>
+            </span>
+          </a>
+          <a class="btn btn-teal fv-btn" href="https://youtube.com/shorts/cXB4joHuqvE" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="fv-copy">
+          <span class="eyebrow">In his own words</span>
+          <p class="fv-pull">It turns out you can know exactly what your time is worth and still build a business that takes all of it.</p>
+          <p class="fv-note">Sixty seconds from Kevin on the shift from operator to conductor &mdash; the failure point that became the SPACE Method.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ THE SPACE METHOD ============ -->
   <section class="section method" id="method">
     <div class="wrap section-inner">
@@ -1023,10 +1089,10 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         <p>Twenty-five questions, five per dimension. One score out of 100, twenty points available per dimension, and a band:</p>
         <div class="meter" role="presentation"></div>
         <div class="bands">
-          <div class="band"><span class="rng">0–40</span><span class="nm">Overwhelmed</span></div>
-          <div class="band"><span class="rng">41–60</span><span class="nm">Constrained</span></div>
-          <div class="band"><span class="rng">61–80</span><span class="nm">Expanding</span></div>
-          <div class="band"><span class="rng">81–100</span><span class="nm">Operating with Space</span></div>
+          <div class="band"><span class="rng">0&ndash;40</span><span class="nm">Overwhelmed</span></div>
+          <div class="band"><span class="rng">41&ndash;60</span><span class="nm">Constrained</span></div>
+          <div class="band"><span class="rng">61&ndash;80</span><span class="nm">Expanding</span></div>
+          <div class="band"><span class="rng">81&ndash;100</span><span class="nm">Operating with Space</span></div>
         </div>
         <p class="kicker">Know your number, and the argument about what to fix first stops being an opinion.</p>
       </div>
@@ -1115,8 +1181,8 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         </div>
       </div>
       <div class="tslider-nav">
-        <button class="tarrow" id="tPrev" aria-label="Previous testimonial">‹</button>
-        <button class="tarrow" id="tNext" aria-label="Next testimonial">›</button>
+        <button class="tarrow" id="tPrev" aria-label="Previous testimonial">&#8249;</button>
+        <button class="tarrow" id="tNext" aria-label="Next testimonial">&#8250;</button>
         <div class="tdots" id="tDots" role="tablist" aria-label="Choose testimonial"></div>
       </div>
     </div>
