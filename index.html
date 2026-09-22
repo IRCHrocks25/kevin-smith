@@ -8,10 +8,10 @@
 
 <!-- ============================================================
      BRAND LINKS (DFY team: wire these to live destinations)
-       Book a Call  -> https://strategy.steadybridgeconsulting.com
-       SPACE Score  -> live self-serve diagnostic (routes to Katalyst,
-                       triggers the 15-day segmented email sequence).
-                       Placeholder path below — replace with real URL.
+     Single CTA throughout the page:
+       SPACE Score  -> https://steadybridgeconsulting.com/space-score
+                       (the live self-serve diagnostic on the Next.js site;
+                        routes to Katalyst, triggers the 15-day segmented email sequence).
      LAYOUT: section architecture mirrors the supplied reference
      (overlay hero, card rows, bento method, dark testimonial slider,
      good/bad filter, tall closing band). Image slots are rendered as
@@ -273,47 +273,6 @@ body.menu-locked{overflow:hidden}
 .story-toggle:hover{background:var(--teal);border-color:var(--teal);color:#fff}
 @media (min-width:1024px){.about-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4rem}.about-panel{min-height:560px;order:2}.story-body{order:1}}
 
-/* ============ FOUNDER VIDEO (60-second, in his own words) ============ */
-.founder-video{background:var(--tint)}
-.fv-cols{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center;justify-items:center}
-.fv-media{width:min(300px,100%);display:flex;flex-direction:column;align-items:center}
-.fv-frame{
-  position:relative;width:100%;display:block;
-  aspect-ratio:9/16;
-  border-radius:16px;overflow:hidden;
-  background:#000;text-decoration:none;
-  box-shadow:0 18px 40px rgba(15,12,10,.22);
-  border:1px solid var(--sand);
-  transition:transform .2s ease, box-shadow .2s ease;
-}
-.fv-frame:hover,.fv-frame:focus-visible{transform:translateY(-2px);box-shadow:0 22px 48px rgba(15,12,10,.3)}
-.fv-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.fv-play{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:72px;height:52px;pointer-events:none;
-  filter:drop-shadow(0 6px 16px rgba(0,0,0,.45));
-  transition:transform .2s ease;
-}
-.fv-frame:hover .fv-play,.fv-frame:focus-visible .fv-play{transform:translate(-50%,-50%) scale(1.08)}
-.fv-play svg{width:100%;height:100%;display:block}
-.fv-play-bg{fill:#212121;opacity:.9;transition:fill .18s ease,opacity .18s ease}
-.fv-frame:hover .fv-play-bg,.fv-frame:focus-visible .fv-play-bg{fill:#e11d1d;opacity:1}
-.fv-play-tri{fill:#fff}
-.fv-btn{margin-top:1.15rem;align-self:center}
-.fv-copy{text-align:center;max-width:52ch}
-.fv-copy .eyebrow{margin-bottom:1.1rem}
-.fv-pull{
-  font-family:'Lora',serif;font-style:italic;
-  font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.35;
-  color:var(--espresso);letter-spacing:-.01em;
-}
-.fv-note{color:var(--slate-2);margin-top:1rem;font-size:.95rem;line-height:1.55}
-@media (min-width:820px){
-  .fv-cols{grid-template-columns:280px minmax(0,1fr);gap:3.5rem;justify-items:start;align-items:center}
-  .fv-media{width:280px}
-  .fv-copy{text-align:left}
-}
-
 /* ============ METHOD — bento ============ */
 .method{background:var(--tint)}
 .bento{display:grid;grid-template-columns:1fr;gap:1rem}
@@ -564,7 +523,7 @@ body.menu-locked{overflow:hidden}
 .offer .desc{font-size:.97rem;color:var(--slate);margin:0}
 .offer ul{list-style:none;margin:1.2rem 0;padding:0;display:grid;gap:.7rem}
 .offer li{position:relative;padding-left:1.5rem;font-size:.97rem;color:var(--slate)}
-.offer li::before{content:"✓";position:absolute;left:0;color:var(--brass);font-weight:700}
+.offer li::before{content:"—";position:absolute;left:0;color:var(--brass);font-weight:700}
 .offer .for{font-size:.95rem;font-style:italic;color:var(--slate-2);margin:0 0 1.1rem}
 .offer .price{margin-top:auto;padding-top:1.1rem;border-top:1px solid var(--sand);color:var(--brass);font-weight:700;line-height:1.45}
 .offers-close{margin-top:2.4rem;max-width:66ch;color:var(--slate)}
@@ -813,14 +772,14 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 <!-- ============ OVERLAY HEADER ============ -->
 <header class="topbar">
   <div class="wrap-wide topbar-inner">
-    <a class="logo" href="#top" aria-label="Steady Bridge Consulting"><img src="https://dashboard.katalyst-crm.com/files/t1/Ekran%20Resmi%202026-08-29%2000.20.43%201%201.png" alt="Steady Bridge Consulting"></a>
+    <a class="logo" href="#top" aria-label="Steady Bridge Consulting"><img src="https://cdn.katalyst-crm.com/a/d0ed3446-75c4-de8b-690b-f7827631f3e2" alt="Steady Bridge Consulting"></a>
     <nav class="nav-desktop" aria-label="Main">
       <a href="#method">The SPACE Method</a>
       <a href="#offers">Offers</a>
       <a href="#about">About</a>
-      <a href="#method">Free SPACE Score</a>
+      <a href="https://steadybridgeconsulting.com/space-score">Free SPACE Score</a>
     </nav>
-    <a class="btn topbar-cta" href="https://strategy.steadybridgeconsulting.com">Book a Call</a>
+    <a class="btn topbar-cta" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -829,8 +788,8 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   <a href="#method">The SPACE Method</a>
   <a href="#offers">Offers</a>
   <a href="#about">About</a>
-  <a href="#method">Free SPACE Score</a>
-  <a class="btn btn-primary" href="https://strategy.steadybridgeconsulting.com">Book a SPACE Strategy Call</a>
+  <a href="https://steadybridgeconsulting.com/space-score">Free SPACE Score</a>
+  <a class="btn btn-primary" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
 </nav>
 
 <main>
@@ -838,9 +797,9 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
     <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-photo" aria-hidden="true" id="heroPhoto1" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260828_214138_87fb394f-6ea1-4194-a6de-901cf8d25c43.png')"></div>
-    <div class="hero-photo hero-photo-2" aria-hidden="true" id="heroPhoto2" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260831_055309_baea35dd-256c-4ea5-8a7d-150eb8d9733e.png')"></div>
-    <div class="hero-photo hero-photo-3" aria-hidden="true" id="heroPhoto3" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260831_055309_81e30487-debb-4480-aa30-df53a1dcbaa3.png')"></div>
+    <div class="hero-photo" aria-hidden="true" id="heroPhoto1" style="background-image:url('https://cdn.katalyst-crm.com/a/6e388cdc-5d3e-9e49-6c7c-796e343a0820')"></div>
+    <div class="hero-photo hero-photo-2" aria-hidden="true" id="heroPhoto2" style="background-image:url('https://cdn.katalyst-crm.com/a/8ff81f30-ffdf-2e5d-acd3-2890ecac20f4')"></div>
+    <div class="hero-photo hero-photo-3" aria-hidden="true" id="heroPhoto3" style="background-image:url('https://cdn.katalyst-crm.com/a/1ed277e9-264c-0210-b4fe-b8f0c606f9e9')"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="wrap-wide hero-grid">
       <div class="hero-inner">
@@ -850,47 +809,11 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         <p class="hero-built">Built by an engineer who became the bottleneck in his own company, then took the failure apart.</p>
         <div class="hero-cta">
           <div class="hero-cta-row">
-            <a class="btn btn-primary" href="https://strategy.steadybridgeconsulting.com">Book a SPACE Strategy Call</a>
-            <!-- SPACE Score diagnostic: replace href with the live self-serve diagnostic URL -->
-            <a class="score-link on-dark" href="https://steadybridgeconsulting.com/space-score">Get your SPACE Score — Free, 25 questions <span class="arrow">→</span></a>
+            <a class="btn btn-primary" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
           </div>
-          <p class="risk-note">20 minutes. You bring your Score, we find the single place you are losing the most room. No proposal attached.</p>
+          <p class="risk-note">Twenty minutes, twenty-five questions, one score out of 100. The room doesn&rsquo;t come back on its own.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ CREDIBILITY (stat / proof pattern) ============ -->
-  <section class="section proof" id="about">
-    <div class="wrap section-inner">
-      <div class="row-head center-head">
-        <h2>Twenty years fixing systems. One business that taught me the hard part.</h2>
-      </div>
-      <div class="prose-cols">
-        <p>I spent more than twenty years as a principal engineer and architect, taking apart complex systems and finding the one place they actually break. Then I built a business of my own, grew it to $52,000 a month in fifteen months, and became the thing it depended on.</p>
-        <p>Both halves matter. One is why I can find the failure. The other is why I know what it feels like from the inside.</p>
-      </div>
-
-      <div class="stat-strip">
-        <div class="stat-row" data-stat>
-          <div class="stat-num" data-typed="20+ Years"><span class="typed">20+ Years</span></div>
-          <div class="stat-lbl">Principal engineer and architect, Azure and .NET</div>
-        </div>
-        <div class="stat-row" data-stat>
-          <div class="stat-num" data-typed="$52K/Month"><span class="typed">$52K/Month</span></div>
-          <div class="stat-lbl">Business built from zero in 15 months, 300+ members, 8 employees</div>
-        </div>
-        <div class="stat-row" data-stat>
-          <div class="stat-num" data-typed="25 Questions"><span class="typed">25 Questions</span></div>
-          <div class="stat-lbl">One diagnostic, five dimensions, one score out of 100</div>
-        </div>
-        <div class="stat-row" data-stat>
-          <div class="stat-num" data-typed="Ranked by Effort"><span class="typed">Ranked by Effort</span></div>
-          <div class="stat-lbl">Every recommendation tells you what you can do yourself, so you don&rsquo;t hire out what you don&rsquo;t need to</div>
-        </div>
-      </div>
-
-      <p class="trust-line">Owner-led companies in construction, HVAC, transport and professional services.</p>
     </div>
   </section>
 
@@ -899,7 +822,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     <div class="wrap section-inner">
       <div class="rec-cols">
         <div class="rec-side">
-          <aside class="rec-photo" aria-hidden="true" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260831_055310_81cd9cb1-c919-42c7-8589-4462fa36fbd0.png');"></aside>
+          <aside class="rec-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/4cda972b-6bae-c636-1ef1-edbe4e5f92ed');"></aside>
           <p class="rec-punchline-inline">Here is what none of it addressed. Delegation is not the fix. Delegation is what becomes possible after the fix.</p>
         </div>
         <div class="rec-body">
@@ -952,66 +875,6 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     </div>
   </section>
 
-  <!-- ============ FOUNDER STORY (about, collapsible) ============ -->
-  <section class="section about">
-    <div class="wrap section-inner">
-      <div class="about-head">
-        <span class="eyebrow">Founder Story</span>
-        <h2>I already knew better. I built the trap anyway.</h2>
-        <p class="about-lede">If the most motivated person in the room ends up owner-dependent anyway, then motivation is not the failure point. The structure is.</p>
-      </div>
-      <div class="about-cols">
-        <!-- branded panel in place of a portrait -->
-        <div class="about-panel" style="background-image:url('https://dashboard.katalyst-crm.com/files/t1/Aragon-Confident-hand-placement.jpeg');background-size:cover;background-position:center top;">
-          <div class="founder-card">
-            <div class="founder-card-name">Kevin Smith</div>
-            <div class="founder-card-role">Founder, Steady Bridge Consulting</div>
-          </div>
-        </div>
-        <div class="story-body" id="storyBody">
-          <p class="lead-p">In 2009 I got a cancer diagnosis.</p>
-          <p>I was an engineer, deep into a career of making complicated systems work, and for a few weeks none of that was the point. I did the arithmetic nobody wants to do. I came out the other side certain of exactly one thing: days are the scarce resource. Not money. Days. I would have told you I could never forget it.</p>
-          <p>Ten years later I owned a kickboxing studio. Zero to $52,000 a month in fifteen months. Three hundred members. Eight employees. Profitable. By every number I would have used to judge somebody else&rsquo;s business, it worked.</p>
-          <p><strong>And I was doing follow-up at ten at night.</strong></p>
-          <p>Every question came to me. Every fire drill ended at my desk. I was proud of it and tired of it in the same sentence, and the part I had to sit with is this: I was the one person who should have been immune. I had learned the lesson under the worst conditions available. And I still built a machine that ate my days.</p>
-          <div class="story-more" id="storyMore">
-            <div class="inner-more">
-              <p>Somewhere in there I stopped enjoying it. That is the part nobody says out loud. You can be proud of a business and quietly relieved when a client cancels.</p>
-              <p>That is when it stopped being a personal failing and became an engineering problem. So I traced it the way I would trace any system failing under load. It breaks in five specific places.</p>
-              <p class="pull">Systems. Priorities. Automation. Capacity. Energy. That teardown became the SPACE Method.</p>
-            </div>
-          </div>
-          <button class="story-toggle" id="storyToggle" aria-expanded="false" aria-controls="storyMore">Read more</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FOUNDER VIDEO (bridge from personal story to the method) ============ -->
-  <section class="section founder-video" aria-label="Kevin Smith, in his own words">
-    <div class="wrap section-inner">
-      <div class="fv-cols">
-        <div class="fv-media">
-          <a class="fv-frame" href="https://youtube.com/shorts/cXB4joHuqvE" target="_blank" rel="noopener" aria-label="Watch Kevin Smith on YouTube (opens in a new tab)">
-            <img src="https://dashboard.katalyst-crm.com/files/t1/Ekran%20Resmi%202026-09-04%2009.55.25.png" alt="Kevin Smith &mdash; Steady Bridge Consulting" loading="lazy">
-            <span class="fv-play" aria-hidden="true">
-              <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
-                <path class="fv-play-bg" d="M66.52 7.74a8.5 8.5 0 0 0-5.98-6C55.35.5 34 .5 34 .5s-21.35 0-26.54 1.24a8.5 8.5 0 0 0-5.98 6C.24 12.93.24 24 .24 24s0 11.07 1.24 16.26a8.5 8.5 0 0 0 5.98 6C12.65 47.5 34 47.5 34 47.5s21.35 0 26.54-1.24a8.5 8.5 0 0 0 5.98-6C67.76 35.07 67.76 24 67.76 24s0-11.07-1.24-16.26z"/>
-                <polygon class="fv-play-tri" points="27,34 45,24 27,14"/>
-              </svg>
-            </span>
-          </a>
-          <a class="btn btn-teal fv-btn" href="https://youtube.com/shorts/cXB4joHuqvE" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="fv-copy">
-          <span class="eyebrow">In his own words</span>
-          <p class="fv-pull">It turns out you can know exactly what your time is worth and still build a business that takes all of it.</p>
-          <p class="fv-note">Sixty seconds from Kevin on the shift from operator to conductor &mdash; the failure point that became the SPACE Method.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ THE SPACE METHOD ============ -->
   <section class="section method" id="method">
     <div class="wrap section-inner">
@@ -1022,7 +885,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
       </div>
 
       <div class="method-cols">
-        <div class="method-illustration" aria-hidden="true" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260831_055309_691e0392-fb98-47c9-98e3-933b76318784.png');"></div>
+        <div class="method-illustration" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/d05ffa72-36ba-8fc2-0cf7-80dc2e019910');"></div>
 
         <div class="method-body">
           <div class="dim-list">
@@ -1089,10 +952,10 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         <p>Twenty-five questions, five per dimension. One score out of 100, twenty points available per dimension, and a band:</p>
         <div class="meter" role="presentation"></div>
         <div class="bands">
-          <div class="band"><span class="rng">0&ndash;40</span><span class="nm">Overwhelmed</span></div>
-          <div class="band"><span class="rng">41&ndash;60</span><span class="nm">Constrained</span></div>
-          <div class="band"><span class="rng">61&ndash;80</span><span class="nm">Expanding</span></div>
-          <div class="band"><span class="rng">81&ndash;100</span><span class="nm">Operating with Space</span></div>
+          <div class="band"><span class="rng">0–40</span><span class="nm">Overwhelmed</span></div>
+          <div class="band"><span class="rng">41–60</span><span class="nm">Constrained</span></div>
+          <div class="band"><span class="rng">61–80</span><span class="nm">Expanding</span></div>
+          <div class="band"><span class="rng">81–100</span><span class="nm">Operating with Space</span></div>
         </div>
         <p class="kicker">Know your number, and the argument about what to fix first stops being an opinion.</p>
       </div>
@@ -1109,7 +972,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     <div class="wrap section-inner">
       <div class="vs-cols">
         <div class="vs-side">
-          <aside class="vs-photo" aria-hidden="true" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260831_061741_af8ecb11-0ab9-41a5-be02-2102075f0718.png');"></aside>
+          <aside class="vs-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/5610b4cb-a5cc-d971-1094-b77c2ac932b5');"></aside>
           <p class="disclaimer">Every number you see in a Leverage Map comes from your own inputs, and it comes as a range, labelled estimated. I do not promise overnight change, autonomous AI, or results without your team doing work. Conservative math is not modesty. It is the only kind you can plan against.</p>
         </div>
         <div class="vs-body-col">
@@ -1157,9 +1020,103 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     </div>
   </section>
 
+  <!-- ============ CREDIBILITY (stat / proof pattern) ============ -->
+  <section class="section proof" id="about">
+    <div class="wrap section-inner">
+      <div class="row-head center-head">
+        <h2>Twenty years fixing systems. One business that taught me the hard part.</h2>
+      </div>
+      <div class="prose-cols">
+        <p>I spent more than twenty years as a principal engineer and architect, taking apart complex systems and finding the one place they actually break. Then I built a business of my own, grew it to $52,000 a month in fifteen months, and became the thing it depended on.</p>
+        <p>Both halves matter. One is why I can find the failure. The other is why I know what it feels like from the inside.</p>
+      </div>
+
+      <div class="stat-strip">
+        <div class="stat-row" data-stat>
+          <div class="stat-num" data-typed="20+ Years"><span class="typed">20+ Years</span></div>
+          <div class="stat-lbl">Principal engineer and architect, Azure and .NET</div>
+        </div>
+        <div class="stat-row" data-stat>
+          <div class="stat-num" data-typed="$52K/Month"><span class="typed">$52K/Month</span></div>
+          <div class="stat-lbl">Business built from zero in 15 months, 300+ members, 8 employees</div>
+        </div>
+        <div class="stat-row" data-stat>
+          <div class="stat-num" data-typed="25 Questions"><span class="typed">25 Questions</span></div>
+          <div class="stat-lbl">One diagnostic, five dimensions, one score out of 100</div>
+        </div>
+        <div class="stat-row" data-stat>
+          <div class="stat-num" data-typed="Ranked by Effort"><span class="typed">Ranked by Effort</span></div>
+          <div class="stat-lbl">Every recommendation tells you what you can do yourself, so you don&rsquo;t hire out what you don&rsquo;t need to</div>
+        </div>
+      </div>
+
+      <p class="trust-line">Owner-led companies in construction, HVAC, transport and professional services.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOUNDER STORY (about, collapsible) ============ -->
+  <section class="section about">
+    <div class="wrap section-inner">
+      <div class="about-head">
+        <span class="eyebrow">Founder Story</span>
+        <h2>I already knew better. I built the trap anyway.</h2>
+        <p class="about-lede">If the most motivated person in the room ends up owner-dependent anyway, then motivation is not the failure point. The structure is.</p>
+      </div>
+      <div class="about-cols">
+        <!-- branded panel in place of a portrait -->
+        <div class="about-panel" style="background-image:url('https://cdn.katalyst-crm.com/a/44ef8668-7a42-f536-c341-bbe8f09a1970');background-size:cover;background-position:center top;">
+          <div class="founder-card">
+            <div class="founder-card-name">Kevin Smith</div>
+            <div class="founder-card-role">Founder, Steady Bridge Consulting</div>
+          </div>
+        </div>
+        <div class="story-body" id="storyBody">
+          <p class="lead-p">In 2009 I got a cancer diagnosis.</p>
+          <p>I was an engineer, deep into a career of making complicated systems work, and for a few weeks none of that was the point. I did the arithmetic nobody wants to do. I came out the other side certain of exactly one thing: days are the scarce resource. Not money. Days. I would have told you I could never forget it.</p>
+          <p>Ten years later I owned a kickboxing studio. Zero to $52,000 a month in fifteen months. Three hundred members. Eight employees. Profitable. By every number I would have used to judge somebody else&rsquo;s business, it worked.</p>
+          <p><strong>And I was doing follow-up at ten at night.</strong></p>
+          <p>Every question came to me. Every fire drill ended at my desk. I was proud of it and tired of it in the same sentence, and the part I had to sit with is this: I was the one person who should have been immune. I had learned the lesson under the worst conditions available. And I still built a machine that ate my days.</p>
+          <div class="story-more" id="storyMore">
+            <div class="inner-more">
+              <p>Somewhere in there I stopped enjoying it. That is the part nobody says out loud. You can be proud of a business and quietly relieved when a client cancels.</p>
+              <p>That is when it stopped being a personal failing and became an engineering problem. So I traced it the way I would trace any system failing under load. It breaks in five specific places.</p>
+              <p class="pull">Systems. Priorities. Automation. Capacity. Energy. That teardown became the SPACE Method.</p>
+            </div>
+          </div>
+          <button class="story-toggle" id="storyToggle" aria-expanded="false" aria-controls="storyMore">Read more</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MISSION ============ -->
+  <section class="section mission">
+    <div class="wrap section-inner">
+      <div class="mission-hero" style="background-image:url('https://cdn.katalyst-crm.com/a/231b0752-e173-82c4-5e61-ae1e61fd27a6');">
+        <div class="mission-hero-scrim" aria-hidden="true"></div>
+        <div class="mission-hero-copy">
+          <span class="mission-eyebrow">Mission</span>
+          <h2 class="mission-h2">What I actually think is going on.</h2>
+          <p>Most owners are not failing to lead because they lack ambition or intelligence. They are failing to lead because there is no room left to do it. They answer every question, review every decision, and run every fire drill, and somewhere along the way that started getting called indispensability.</p>
+          <p><strong>It is not. It is a systems problem, and systems problems run out eventually.</strong></p>
+
+          <div class="mission-more" id="missionMore">
+            <div class="mission-more-inner">
+              <p>Room is not the point either. Room is what lets you do the thing you started this for. Run the company instead of the day. Build it toward the version you had in mind at the beginning, which is still in there somewhere. Enjoy owning it while you own it.</p>
+              <p>By 2030 I want to have helped thousands of businesses depend on their owner less and give their owner more back. That is the whole thing.</p>
+              <p class="mission-line-inline">SPACE over strain. Systems over dependence.</p>
+            </div>
+          </div>
+
+          <button class="mission-toggle" id="missionToggle" aria-expanded="false" aria-controls="missionMore">Read more</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ TESTIMONIALS (dark slider) ============ -->
   <section class="tslider-section" aria-roledescription="carousel" aria-label="Client testimonials">
-    <div class="tslider-bg" aria-hidden="true" style="background-image:linear-gradient(105deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.5) 55%,rgba(15,12,10,.35) 100%),url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260828_113604_2c3e2aed-7237-4ef0-b4ef-0e48104a0202.png');background-size:cover;background-position:center top;"></div>
+    <div class="tslider-bg" aria-hidden="true" style="background-image:linear-gradient(105deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.5) 55%,rgba(15,12,10,.35) 100%),url('https://cdn.katalyst-crm.com/a/95a1be1c-dbdf-04fc-1462-db7b4900626f');background-size:cover;background-position:center top;"></div>
     <div class="wrap section-inner">
       <span class="eyebrow">In their words</span>
       <div class="tslider-viewport">
@@ -1181,8 +1138,8 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         </div>
       </div>
       <div class="tslider-nav">
-        <button class="tarrow" id="tPrev" aria-label="Previous testimonial">&#8249;</button>
-        <button class="tarrow" id="tNext" aria-label="Next testimonial">&#8250;</button>
+        <button class="tarrow" id="tPrev" aria-label="Previous testimonial">‹</button>
+        <button class="tarrow" id="tNext" aria-label="Next testimonial">›</button>
         <div class="tdots" id="tDots" role="tablist" aria-label="Choose testimonial"></div>
       </div>
     </div>
@@ -1199,7 +1156,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
       <div class="offer-grid">
         <article class="offer">
-          <div class="offer-header" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260831_051414_02013256-d0d3-4274-8660-121727ef1b81.png');">
+          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/42dad303-4de8-85a7-7c4e-2282589849af');">
             <div class="offer-header-scrim" aria-hidden="true"></div>
             <h3 class="offer-name">SPACE Intensive</h3>
           </div>
@@ -1217,7 +1174,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         </article>
 
         <article class="offer is-featured">
-          <div class="offer-header" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260831_051414_f7108fca-f394-4f3a-90ec-8663500769dc.png');">
+          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/9177f4f1-6a5a-f2df-cb44-233a09566dad');">
             <div class="offer-header-scrim" aria-hidden="true"></div>
             <span class="offer-badge">Most chosen</span>
             <h3 class="offer-name">SPACE Advisory</h3>
@@ -1236,7 +1193,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         </article>
 
         <article class="offer">
-          <div class="offer-header" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260831_051414_d6357c7e-dd9d-49f1-9e50-dfcac56cc29e.png');">
+          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/d500dbed-0b49-a793-5909-f5c573d5ee2a');">
             <div class="offer-header-scrim" aria-hidden="true"></div>
             <h3 class="offer-name">SPACE Accelerator</h3>
           </div>
@@ -1256,7 +1213,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
       <p class="offers-close" style="text-align:center;margin-inline:auto;">You do not need to know which one is yours. That is what the Score is for. Take the Score, get your number, and if the honest recommendation is the $897 seat, that is what I will tell you.</p>
       <div class="offers-cta" style="display:flex;justify-content:center;">
-        <a class="btn btn-primary" href="https://strategy.steadybridgeconsulting.com">Book a SPACE Strategy Call</a>
+        <a class="btn btn-primary" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
       </div>
     </div>
   </section>
@@ -1266,7 +1223,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     <div class="wrap section-inner">
       <div class="obj-cols">
         <div class="obj-side">
-          <aside class="obj-photo" aria-hidden="true" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260828_131658_6afc2373-ec19-45ee-9edc-d782ad622370.png');"></aside>
+          <aside class="obj-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/6138aa82-bc6a-3e64-b60e-1d9230be3a75');"></aside>
           <div class="not-for">
             <h3><span class="badge" aria-hidden="true"></span>Who this is not for</h3>
             <ul>
@@ -1338,61 +1295,35 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     </div>
   </section>
 
-  <!-- ============ MISSION ============ -->
-  <section class="section mission">
-    <div class="wrap section-inner">
-      <div class="mission-hero" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260828_213225_9335b404-168b-48c3-a75f-197aa796a4f8.png');">
-        <div class="mission-hero-scrim" aria-hidden="true"></div>
-        <div class="mission-hero-copy">
-          <span class="mission-eyebrow">Mission</span>
-          <h2 class="mission-h2">What I actually think is going on.</h2>
-          <p>Most owners are not failing to lead because they lack ambition or intelligence. They are failing to lead because there is no room left to do it. They answer every question, review every decision, and run every fire drill, and somewhere along the way that started getting called indispensability.</p>
-          <p><strong>It is not. It is a systems problem, and systems problems run out eventually.</strong></p>
-
-          <div class="mission-more" id="missionMore">
-            <div class="mission-more-inner">
-              <p>Room is not the point either. Room is what lets you do the thing you started this for. Run the company instead of the day. Build it toward the version you had in mind at the beginning, which is still in there somewhere. Enjoy owning it while you own it.</p>
-              <p>By 2030 I want to have helped thousands of businesses depend on their owner less and give their owner more back. That is the whole thing.</p>
-              <p class="mission-line-inline">SPACE over strain. Systems over dependence.</p>
-            </div>
-          </div>
-
-          <button class="mission-toggle" id="missionToggle" aria-expanded="false" aria-controls="missionMore">Read more</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ CLOSING (tall dark band) ============ -->
   <section class="closing" id="contact">
-    <div class="closing-bg" aria-hidden="true" style="background-image:url('https://dashboard.katalyst-crm.com/files/t1/hf_20260828_113613_0ec03b73-4fc6-4c0b-9a5c-4b0c4c64a02d%201.png')"></div>
+    <div class="closing-bg" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/51a5c4fe-bd27-d971-0e20-3db0767f89f3')"></div>
     <div class="closing-scrim" aria-hidden="true"></div>
     <div class="wrap-wide section-inner">
       <h2>You built something worth leading.<br>Take the room back.</h2>
       <p>Twenty minutes, one number, and a straight answer about where your room is going. Not so the week is calmer, though it will be. So the business can grow past the size of your attention, and so you can enjoy owning the thing you built.</p>
       <ul>
-        <li>Your Score read back to you, dimension by dimension</li>
+        <li>Your score out of 100, dimension by dimension</li>
         <li>The single place you are losing the most room, named</li>
         <li>A clear read on what you can fix yourself and what you cannot</li>
-        <li>No proposal, unless you ask for one</li>
+        <li>You keep the result whether or not we ever speak</li>
       </ul>
       <div class="hero-cta">
         <div class="hero-cta-row">
-          <a class="btn btn-primary" href="https://strategy.steadybridgeconsulting.com">Book a SPACE Strategy Call</a>
-          <!-- SPACE Score diagnostic: replace href with the live self-serve diagnostic URL -->
-          <a class="score-link on-dark" href="https://steadybridgeconsulting.com/space-score">Not ready to talk? Take the SPACE Score — Free <span class="arrow">→</span></a>
+          <a class="btn btn-primary" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
         </div>
+        <p class="risk-note">The room doesn&rsquo;t come back on its own. Twenty minutes is a small thing to spend to find out how much it&rsquo;s running you.</p>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- ============ FOOTER ============ -->
+  <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <img class="foot-logo" src="https://dashboard.katalyst-crm.com/files/t1/Ekran%20Resmi%202026-08-29%2000.20.43%201%201.png" alt="Steady Bridge Consulting">
+      <img class="foot-logo" src="https://cdn.katalyst-crm.com/a/d0ed3446-75c4-de8b-690b-f7827631f3e2" alt="Steady Bridge Consulting">
       <p class="tagline">Creating SPACE for leaders.<br>SPACE over strain. Systems over dependence.</p>
     </div>
     <div class="foot-col">
@@ -1413,7 +1344,6 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         <li><a href="#offers">Offers</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="https://steadybridgeconsulting.com/space-score">Free SPACE Score</a></li>
-        <li><a href="https://strategy.steadybridgeconsulting.com">Book a Call</a></li>
       </ul>
     </div>
     <p class="foot-credo">You can know exactly what your time is worth and still build a business that takes all of it. That&rsquo;s why the method exists.</p>
