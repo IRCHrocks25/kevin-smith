@@ -269,7 +269,7 @@ body.menu-locked{overflow:hidden}
   justify-self:center;
 }
 .iho-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.iho-video.is-playing .iho-cover{opacity:0;transition:opacity .4s ease}
+.iho-video.is-loaded .iho-cover{opacity:0;transition:opacity .4s ease}
 .iho-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1}
 .iho-body{min-width:0}
 .iho-body .eyebrow{margin-bottom:1.6rem}
@@ -285,11 +285,12 @@ body.menu-locked{overflow:hidden}
 @media (min-width:900px){
   /* explicit track width: an auto track collapses to 0 here, because the
      player is width:100% and everything inside it is absolutely positioned */
-  .iho-cols{grid-template-columns:260px minmax(0,1fr);gap:4rem}
+  /* copy column hugs its own content so the pair can sit centred in the wrap */
+  .iho-cols{grid-template-columns:260px minmax(0,auto);gap:4rem;justify-content:center}
   .iho-video{max-width:none;justify-self:start}
 }
 @media (min-width:1200px){
-  .iho-cols{grid-template-columns:290px minmax(0,1fr);gap:5rem}
+  .iho-cols{grid-template-columns:290px minmax(0,auto);gap:5rem}
 }
 .story-body{display:grid;gap:1.05rem}
 .story-body p{color:var(--slate);max-width:66ch}
@@ -1472,7 +1473,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     go(0);
   }
 
-  /* ---- muted looping video; YouTube shows its own controls on hover ----
+  /* ---- inline player, no autoplay; YouTube shows its own controls on hover ----
      The player is only created once the section scrolls into view, so the
      YouTube payload is not fetched for visitors who never reach it. The
      cover image stays underneath until the iframe is up. */
@@ -1480,12 +1481,11 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   if(ihoEl){
     var VID = 'cXB4joHuqvE';
     function launchVideo(){
-      if(ihoEl.classList.contains('is-playing')) return;
-      ihoEl.classList.add('is-playing');
+      if(ihoEl.classList.contains('is-loaded')) return;
+      ihoEl.classList.add('is-loaded');
       var ifr = document.createElement('iframe');
       ifr.src = 'https://www.youtube.com/embed/' + VID +
-                '?autoplay=1&mute=1&loop=1&playlist=' + VID +
-                '&controls=1&playsinline=1&rel=0&modestbranding=1';
+                '?controls=1&playsinline=1&rel=0&modestbranding=1';
       ifr.title = 'Kevin Smith — Steady Bridge Consulting';
       ifr.setAttribute('frameborder','0');
       ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
