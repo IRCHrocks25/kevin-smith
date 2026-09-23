@@ -264,23 +264,13 @@ body.menu-locked{overflow:hidden}
 /* ============ IN HIS OWN WORDS (video section) ============ */
 .iho-cols{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center}
 .iho-video{
-  position:relative;width:100%;max-width:400px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;
-  box-shadow:0 8px 28px rgba(31,26,21,.14);background:var(--espresso);cursor:pointer;
+  position:relative;width:100%;max-width:280px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;
+  box-shadow:0 8px 28px rgba(31,26,21,.14);background:var(--espresso);
+  justify-self:center;
 }
-.iho-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.iho-video:hover .iho-cover{transform:scale(1.03)}
-.iho-play{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
-  width:68px;height:68px;border:0;background:rgba(31,26,21,.45);border-radius:50%;
-  cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  transition:background .2s ease,transform .2s ease;
-}
-.iho-play:hover{background:rgba(31,26,21,.65);transform:translate(-50%,-50%) scale(1.08)}
-.iho-play svg{width:68px;height:68px}
-.iho-video.is-playing .iho-cover,
-.iho-video.is-playing .iho-play{display:none}
-.iho-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.iho-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.iho-video.is-playing .iho-cover{opacity:0;transition:opacity .4s ease}
+.iho-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1}
 .iho-body{min-width:0}
 .iho-body .eyebrow{margin-bottom:1.6rem}
 .iho-quote{
@@ -293,12 +283,13 @@ body.menu-locked{overflow:hidden}
 .iho-link{margin-top:1.8rem}
 .iho-link .btn{display:inline-flex;align-items:center;gap:.4rem}
 @media (min-width:900px){
-  .iho-cols{grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:4rem}
-  .iho-video{max-width:360px}
+  /* explicit track width: an auto track collapses to 0 here, because the
+     player is width:100% and everything inside it is absolutely positioned */
+  .iho-cols{grid-template-columns:260px minmax(0,1fr);gap:4rem}
+  .iho-video{max-width:none;justify-self:start}
 }
 @media (min-width:1200px){
-  .iho-video{max-width:400px}
-  .iho-cols{gap:5rem}
+  .iho-cols{grid-template-columns:290px minmax(0,1fr);gap:5rem}
 }
 .story-body{display:grid;gap:1.05rem}
 .story-body p{color:var(--slate);max-width:66ch}
@@ -1133,10 +1124,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     <div class="wrap section-inner">
       <div class="iho-cols">
         <div class="iho-video" id="ihoVideo">
-          <img class="iho-cover" src="https://cdn.katalyst-crm.com/a/12b5e36c-fc7b-4d2b-7e19-5bf96a67d967" alt="Kevin Smith — watch the video">
-          <button class="iho-play" aria-label="Play video">
-            <svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="33" stroke="#fff" stroke-width="2" opacity=".85"/><polygon points="27,20 27,48 50,34" fill="#fff"/></svg>
-          </button>
+          <img class="iho-cover" src="https://cdn.katalyst-crm.com/a/12b5e36c-fc7b-4d2b-7e19-5bf96a67d967" alt="Kevin Smith speaking to camera" aria-hidden="true">
         </div>
         <div class="iho-body">
           <span class="eyebrow">In His Own Words</span>
@@ -1484,23 +1472,36 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     go(0);
   }
 
-  /* ---- video click-to-play ---- */
+  /* ---- muted looping video; YouTube shows its own controls on hover ----
+     The player is only created once the section scrolls into view, so the
+     YouTube payload is not fetched for visitors who never reach it. The
+     cover image stays underneath until the iframe is up. */
   var ihoEl = document.getElementById('ihoVideo');
   if(ihoEl){
-    var playBtn = ihoEl.querySelector('.iho-play');
-    var cover = ihoEl.querySelector('.iho-cover');
+    var VID = 'cXB4joHuqvE';
     function launchVideo(){
+      if(ihoEl.classList.contains('is-playing')) return;
       ihoEl.classList.add('is-playing');
       var ifr = document.createElement('iframe');
-      ifr.src = 'https://www.youtube.com/embed/cXB4joHuqvE?autoplay=1';
+      ifr.src = 'https://www.youtube.com/embed/' + VID +
+                '?autoplay=1&mute=1&loop=1&playlist=' + VID +
+                '&controls=1&playsinline=1&rel=0&modestbranding=1';
       ifr.title = 'Kevin Smith — Steady Bridge Consulting';
       ifr.setAttribute('frameborder','0');
       ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
       ifr.setAttribute('allowfullscreen','');
       ihoEl.appendChild(ifr);
     }
-    if(playBtn) playBtn.addEventListener('click', launchVideo);
-    if(cover) cover.addEventListener('click', launchVideo);
+    if('IntersectionObserver' in window){
+      var ihoIO = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ launchVideo(); ihoIO.unobserve(en.target); }
+        });
+      }, {rootMargin:'200px 0px'});
+      ihoIO.observe(ihoEl);
+    } else {
+      launchVideo();
+    }
   }
 
   /* ---- hero photo carousel ---- */
