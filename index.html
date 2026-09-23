@@ -229,6 +229,7 @@ body.menu-locked{overflow:hidden}
 @media (min-width:820px){.about-head h2{white-space:nowrap}}
 .about-lede{color:var(--slate);font-size:1.06rem;max-width:56ch}
 .about-cols{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:start}
+.about-media{display:flex;flex-direction:column;gap:1.5rem;min-width:0}
 /* portrait photo panel */
 .about-panel{
   position:relative;border-radius:16px;overflow:hidden;min-height:480px;
@@ -260,6 +261,45 @@ body.menu-locked{overflow:hidden}
   .about-panel .founder-card-role{font-size:.82rem;margin-top:.2rem}
 }
 .about-panel .panel-tag{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#E4C89A}
+/* ============ IN HIS OWN WORDS (video section) ============ */
+.iho-cols{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center}
+.iho-video{
+  position:relative;width:100%;max-width:400px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;
+  box-shadow:0 8px 28px rgba(31,26,21,.14);background:var(--espresso);cursor:pointer;
+}
+.iho-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.iho-video:hover .iho-cover{transform:scale(1.03)}
+.iho-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
+  width:68px;height:68px;border:0;background:rgba(31,26,21,.45);border-radius:50%;
+  cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  transition:background .2s ease,transform .2s ease;
+}
+.iho-play:hover{background:rgba(31,26,21,.65);transform:translate(-50%,-50%) scale(1.08)}
+.iho-play svg{width:68px;height:68px}
+.iho-video.is-playing .iho-cover,
+.iho-video.is-playing .iho-play{display:none}
+.iho-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.iho-body{min-width:0}
+.iho-body .eyebrow{margin-bottom:1.6rem}
+.iho-quote{
+  font-family:'Lora',Georgia,serif;font-style:italic;
+  font-size:clamp(1.4rem,1.1rem+1.2vw,2rem);font-weight:500;
+  line-height:1.35;color:var(--espresso);letter-spacing:-.01em;
+  margin:0 0 1.4rem;max-width:28ch;
+}
+.iho-desc{color:var(--slate);font-size:1.02rem;max-width:42ch;margin:0}
+.iho-link{margin-top:1.8rem}
+.iho-link .btn{display:inline-flex;align-items:center;gap:.4rem}
+@media (min-width:900px){
+  .iho-cols{grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:4rem}
+  .iho-video{max-width:360px}
+}
+@media (min-width:1200px){
+  .iho-video{max-width:400px}
+  .iho-cols{gap:5rem}
+}
 .story-body{display:grid;gap:1.05rem}
 .story-body p{color:var(--slate);max-width:66ch}
 .story-body .lead-p{color:var(--espresso);font-size:1.08rem}
@@ -1063,7 +1103,6 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         <p class="about-lede">If the most motivated person in the room ends up owner-dependent anyway, then motivation is not the failure point. The structure is.</p>
       </div>
       <div class="about-cols">
-        <!-- branded panel in place of a portrait -->
         <div class="about-panel" style="background-image:url('https://cdn.katalyst-crm.com/a/44ef8668-7a42-f536-c341-bbe8f09a1970');background-size:cover;background-position:center top;">
           <div class="founder-card">
             <div class="founder-card-name">Kevin Smith</div>
@@ -1084,6 +1123,28 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
             </div>
           </div>
           <button class="story-toggle" id="storyToggle" aria-expanded="false" aria-controls="storyMore">Read more</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IN HIS OWN WORDS (video section) ============ -->
+  <section class="section iho">
+    <div class="wrap section-inner">
+      <div class="iho-cols">
+        <div class="iho-video" id="ihoVideo">
+          <img class="iho-cover" src="https://cdn.katalyst-crm.com/a/12b5e36c-fc7b-4d2b-7e19-5bf96a67d967" alt="Kevin Smith — watch the video">
+          <button class="iho-play" aria-label="Play video">
+            <svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="33" stroke="#fff" stroke-width="2" opacity=".85"/><polygon points="27,20 27,48 50,34" fill="#fff"/></svg>
+          </button>
+        </div>
+        <div class="iho-body">
+          <span class="eyebrow">In His Own Words</span>
+          <p class="iho-quote">It turns out you can know exactly what your time is worth and still build a business that takes all of it.</p>
+          <p class="iho-desc">Sixty seconds from Kevin on the shift from operator to conductor &mdash; the failure point that became the SPACE Method.</p>
+          <div class="iho-link">
+            <a class="btn btn-teal" href="https://youtube.com/shorts/cXB4joHuqvE" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -1121,19 +1182,27 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
       <span class="eyebrow">In their words</span>
       <div class="tslider-viewport">
         <div class="tslider-track" id="tsliderTrack">
-          <figure class="tslide" role="group" aria-label="1 of 2">
+          <figure class="tslide" role="group" aria-label="1 of 3">
             <div class="tslide-head">
               <span class="tavatar" aria-hidden="true">WM</span>
               <figcaption>William McPherson<span>Gibor Fence Builders</span></figcaption>
             </div>
             <blockquote>&ldquo;Kevin Smith and his team did an amazing job helping identify pain points in my business! And then they gave me five steps to improve those issues in a strategic fashion. I am currently stepping into the first stage of the solution. And it&rsquo;s already helping!&rdquo;</blockquote>
           </figure>
-          <figure class="tslide" role="group" aria-label="2 of 2">
+          <figure class="tslide" role="group" aria-label="2 of 3">
             <div class="tslide-head">
               <span class="tavatar" aria-hidden="true">SP</span>
               <figcaption>Stacey Pierce<span>The Pierce Institute</span></figcaption>
             </div>
             <blockquote>&ldquo;It&rsquo;s giving me back time that I can spend on more mission-critical things.&rdquo;</blockquote>
+          </figure>
+          <!-- Danny Targonski -->
+          <figure class="tslide" role="group" aria-label="3 of 3">
+            <div class="tslide-head">
+              <span class="tavatar" aria-hidden="true">DT</span>
+              <figcaption>Danny Targonski<span>Owner Partner, Welcome Home</span></figcaption>
+            </div>
+            <blockquote>&ldquo;Steady Bridge Consulting did a great job helping me identify the visual deficiencies within my business&rsquo;s online presence. We are working together to remap everything to ensure the client experience is seamless when looking for our services. Without Kevin and the team at Steady Bridge, we wouldn&rsquo;t have identified this as an issue!&rdquo;</blockquote>
           </figure>
         </div>
       </div>
@@ -1413,6 +1482,25 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     document.getElementById('tNext').addEventListener('click',function(){go(i+1);});
     document.getElementById('tPrev').addEventListener('click',function(){go(i-1);});
     go(0);
+  }
+
+  /* ---- video click-to-play ---- */
+  var ihoEl = document.getElementById('ihoVideo');
+  if(ihoEl){
+    var playBtn = ihoEl.querySelector('.iho-play');
+    var cover = ihoEl.querySelector('.iho-cover');
+    function launchVideo(){
+      ihoEl.classList.add('is-playing');
+      var ifr = document.createElement('iframe');
+      ifr.src = 'https://www.youtube.com/embed/cXB4joHuqvE?autoplay=1';
+      ifr.title = 'Kevin Smith — Steady Bridge Consulting';
+      ifr.setAttribute('frameborder','0');
+      ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      ifr.setAttribute('allowfullscreen','');
+      ihoEl.appendChild(ifr);
+    }
+    if(playBtn) playBtn.addEventListener('click', launchVideo);
+    if(cover) cover.addEventListener('click', launchVideo);
   }
 
   /* ---- hero photo carousel ---- */
