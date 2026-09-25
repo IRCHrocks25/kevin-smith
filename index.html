@@ -132,7 +132,8 @@ body.menu-locked{overflow:hidden}
 }
 
 /* ============ HERO — full-bleed espresso panel ============ */
-.hero{position:relative;overflow:hidden;border-bottom:0;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;isolation:isolate}
+.hero{position:relative;overflow:hidden;border-bottom:0;min-height:78vh;min-height:78svh;display:flex;align-items:flex-end;isolation:isolate}
+@media (min-width:640px){.hero{min-height:100vh;min-height:100svh}}
 .hero-bg{position:absolute;inset:0;z-index:-3;background:linear-gradient(160deg, var(--espresso) 0%, var(--espresso-2) 60%, #0f0c0a 100%);}
 .hero-photo{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center right;filter:saturate(.9) contrast(1.03) sepia(.12) brightness(.9);}
 .hero-photo{transition:opacity 1.2s ease}
