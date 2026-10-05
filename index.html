@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Steady Bridge Consulting — Creating SPACE for leaders</title>
-<meta name="description" content="For owner-led companies where too much still runs through one person. The SPACE Method shows you exactly where the room went — and what it is costing you in growth.">
+<meta name="description" content="For owner-led companies where too much still runs through one person. The SPACE Method™ shows you exactly where the room went — and what it is costing you in growth.">
 
 <!-- ============================================================
      BRAND LINKS (DFY team: wire these to live destinations)
      Single CTA throughout the page:
-       SPACE Score  -> https://steadybridgeconsulting.com/space-score
+       SPACE Score™  -> https://space-score.steadybridgeconsulting.com
                        (the live self-serve diagnostic on the Next.js site;
                         routes to Katalyst, triggers the 15-day segmented email sequence).
      LAYOUT: section architecture mirrors the supplied reference
@@ -36,6 +36,7 @@
   --teal:#2D7A6B;       /* trust: links, nav, secondary CTA */
   --teal-dark:#256556;
   --brass:#B07A30;      /* value: eyebrows, badges, SPACE elements — never on a button */
+  --brass-text:#875B1D; /* darker brass for small-text labels/chips that must meet WCAG AA contrast */
   --clay:#C4562A;       /* action: primary CTA buttons */
   --clay-dark:#A6461F;
   --gutter:clamp(1rem,5vw,4rem);
@@ -59,7 +60,7 @@ strong{color:var(--espresso);font-weight:600}
 .wrap-wide{max-width:1560px;margin-inline:auto;padding-inline:clamp(1rem,3.4vw,3.5rem)}
 .section{border-bottom:1px solid var(--sand)}
 .section-inner{padding-block:clamp(2.75rem,7vw,5.5rem)}
-.eyebrow{display:inline-block;font-size:.74rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);border-bottom:2px solid var(--brass);padding-bottom:.4rem}
+.eyebrow{display:inline-block;font-size:.74rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-text);border-bottom:2px solid var(--brass);padding-bottom:.4rem}
 h1,h2,h3{line-height:1.12;letter-spacing:-0.018em;color:var(--espresso);font-weight:500}
 .min-w-0{min-width:0}
 
@@ -100,8 +101,16 @@ h1,h2,h3{line-height:1.12;letter-spacing:-0.018em;color:var(--espresso);font-wei
 .score-link:hover .arrow{transform:translateX(3px)}
 .score-link.on-dark{color:#E4C89A;border-bottom-color:rgba(228,200,154,.45)}
 
-/* ============ OVERLAY HEADER (absolute over hero, scrolls away) ============ */
-.topbar{position:absolute;top:0;left:0;right:0;z-index:60;background:transparent}
+/* ============ OVERLAY HEADER (fixed over hero; gains a solid bg once scrolled) ============ */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;background:transparent;transition:background .25s ease,box-shadow .25s ease,border-color .25s ease;border-bottom:1px solid transparent}
+.topbar.scrolled{background:var(--ivory);box-shadow:0 2px 14px rgba(31,26,21,.12);border-bottom-color:var(--sand)}
+/* once scrolled, swap the white-knockout logo + nav for dark-on-light so they stay legible */
+.topbar.scrolled .logo img{filter:none}
+.topbar.scrolled .nav-desktop a{color:var(--slate)}
+.topbar.scrolled .nav-desktop a:hover{color:var(--teal)}
+.topbar.scrolled .topbar-cta{color:var(--espresso);border-color:var(--sand)}
+.topbar.scrolled .topbar-cta:hover{background:rgba(31,26,21,.06)}
+.topbar.scrolled .hamburger span{background:var(--espresso)}
 .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:96px}
 .logo{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
 .logo img{height:65px;width:auto;display:block;filter:brightness(0) invert(1);transition:opacity .18s ease}
@@ -132,8 +141,7 @@ body.menu-locked{overflow:hidden}
 }
 
 /* ============ HERO — full-bleed espresso panel ============ */
-.hero{position:relative;overflow:hidden;border-bottom:0;min-height:78vh;min-height:78svh;display:flex;align-items:flex-end;isolation:isolate}
-@media (min-width:640px){.hero{min-height:100vh;min-height:100svh}}
+.hero{position:relative;overflow:hidden;border-bottom:0;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;isolation:isolate}
 .hero-bg{position:absolute;inset:0;z-index:-3;background:linear-gradient(160deg, var(--espresso) 0%, var(--espresso-2) 60%, #0f0c0a 100%);}
 .hero-photo{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center right;filter:saturate(.9) contrast(1.03) sepia(.12) brightness(.9);}
 .hero-photo{transition:opacity 1.2s ease}
@@ -144,7 +152,7 @@ body.menu-locked{overflow:hidden}
 .hero-scrim{position:absolute;inset:0;z-index:-1;background:
   linear-gradient(105deg, rgba(15,12,10,.9) 0%, rgba(15,12,10,.62) 42%, rgba(15,12,10,.12) 100%),
   linear-gradient(to bottom, rgba(15,12,10,.15) 0%, rgba(15,12,10,0) 38%, rgba(15,12,10,.78) 100%);}
-.hero-grid{display:grid;grid-template-columns:1fr;width:100%;padding-block:clamp(1.75rem,13vw,7.5rem) clamp(2.5rem,7vw,4.5rem)}
+.hero-grid{display:grid;grid-template-columns:1fr;width:100%;padding-block:clamp(7rem,13vw,7.5rem) clamp(2.5rem,7vw,4.5rem)}
 .hero-inner{max-width:60rem;min-width:0;color:#fff}
 .hero .eyebrow{color:#E4C89A;border-bottom-color:#E4C89A;margin-bottom:1.4rem}
 .hero h1{font-size:clamp(2.2rem,5vw,4.35rem);font-weight:400;letter-spacing:-.025em;line-height:1.08;color:#fff;max-width:36ch}
@@ -265,13 +273,23 @@ body.menu-locked{overflow:hidden}
 /* ============ IN HIS OWN WORDS (video section) ============ */
 .iho-cols{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center}
 .iho-video{
-  position:relative;width:100%;max-width:280px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;
-  box-shadow:0 8px 28px rgba(31,26,21,.14);background:var(--espresso);
-  justify-self:center;
+  position:relative;width:100%;max-width:400px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;
+  box-shadow:0 8px 28px rgba(31,26,21,.14);background:var(--espresso);cursor:pointer;
 }
-.iho-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.iho-video.is-loaded .iho-cover{opacity:0;transition:opacity .4s ease}
-.iho-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1}
+.iho-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.iho-video:hover .iho-cover{transform:scale(1.03)}
+.iho-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
+  width:68px;height:68px;border:0;background:rgba(31,26,21,.45);border-radius:50%;
+  cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  transition:background .2s ease,transform .2s ease;
+}
+.iho-play:hover{background:rgba(31,26,21,.65);transform:translate(-50%,-50%) scale(1.08)}
+.iho-play svg{width:68px;height:68px}
+.iho-video.is-playing .iho-cover,
+.iho-video.is-playing .iho-play{display:none}
+.iho-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .iho-body{min-width:0}
 .iho-body .eyebrow{margin-bottom:1.6rem}
 .iho-quote{
@@ -284,14 +302,12 @@ body.menu-locked{overflow:hidden}
 .iho-link{margin-top:1.8rem}
 .iho-link .btn{display:inline-flex;align-items:center;gap:.4rem}
 @media (min-width:900px){
-  /* explicit track width: an auto track collapses to 0 here, because the
-     player is width:100% and everything inside it is absolutely positioned */
-  /* copy column hugs its own content so the pair can sit centred in the wrap */
-  .iho-cols{grid-template-columns:260px minmax(0,auto);gap:4rem;justify-content:center}
-  .iho-video{max-width:none;justify-self:start}
+  .iho-cols{grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:4rem}
+  .iho-video{max-width:360px}
 }
 @media (min-width:1200px){
-  .iho-cols{grid-template-columns:290px minmax(0,auto);gap:5rem}
+  .iho-video{max-width:400px}
+  .iho-cols{gap:5rem}
 }
 .story-body{display:grid;gap:1.05rem}
 .story-body p{color:var(--slate);max-width:66ch}
@@ -353,7 +369,7 @@ body.menu-locked{overflow:hidden}
 .score-panel p{color:var(--slate)}
 .meter{height:14px;border-radius:99px;margin:1.2rem 0;background:linear-gradient(90deg,var(--sand),#9CBBAE 55%,var(--teal))}
 .bands{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.2rem}
-.band .rng{color:var(--brass);font-weight:700;font-size:.94rem}
+.band .rng{color:var(--brass-text);font-weight:700;font-size:.94rem}
 .band .nm{display:block;color:var(--slate);font-size:.94rem}
 .score-panel .kicker{margin-top:1.3rem;color:var(--espresso);font-weight:600}
 .method-cta{margin-top:2rem}
@@ -506,9 +522,10 @@ body.menu-locked{overflow:hidden}
 .tslider-nav{display:flex;align-items:center;gap:1.25rem;margin-top:2.4rem}
 .tarrow{width:48px;height:48px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font-size:1.1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease}
 .tarrow:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6)}
-.tdots{display:flex;gap:.5rem}
-.tdot{width:9px;height:9px;border-radius:50%;border:0;padding:0;cursor:pointer;background:rgba(255,255,255,.3);transition:background .15s ease,transform .15s ease}
-.tdot[aria-selected="true"]{background:var(--brass);transform:scale(1.25)}
+.tdots{display:flex;gap:.25rem}
+.tdot{width:24px;height:24px;border-radius:50%;border:0;padding:0;cursor:pointer;background:transparent;display:inline-flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.tdot::before{content:"";width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .15s ease,transform .15s ease}
+.tdot[aria-selected="true"]::before{background:var(--brass);transform:scale(1.25)}
 @media (prefers-reduced-motion:reduce){.tslider-track{transition:none}}
 
 /* ============ OFFERS ============ */
@@ -592,7 +609,7 @@ body.menu-locked{overflow:hidden}
 .tried-item summary:focus-visible{outline:2px solid var(--brass);outline-offset:-2px;border-radius:12px}
 .tried-tag{
   display:inline-flex;align-items:center;justify-content:center;
-  padding:.35rem .8rem;background:var(--brass);color:#fff;border-radius:999px;
+  padding:.35rem .8rem;background:var(--brass-text);color:#fff;border-radius:999px;
   font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1;white-space:nowrap;
 }
 .tried-name{font-size:1.15rem;font-weight:600;color:var(--espresso);letter-spacing:-.01em;font-style:italic}
@@ -703,7 +720,7 @@ body.menu-locked{overflow:hidden}
   content:"YOU";position:absolute;top:-22px;left:calc(63% - 12px);
   font-size:.6rem;font-weight:700;letter-spacing:.12em;color:var(--teal);
 }
-.foot-col h4{color:var(--teal)}
+.foot-col h3{color:var(--teal)}
 .hero-built{border-left-color:var(--teal)}
 
 /* ============ MISSION ============ */
@@ -781,14 +798,14 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 .foot-brand b{font-size:1.35rem;font-weight:600;color:var(--espresso)}
 .foot-logo{height:88px;width:auto;display:block;margin-bottom:.4rem}
 .foot-brand .tagline{font-size:.95rem;color:var(--slate-2);font-style:italic}
-.foot-col h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-2);margin-bottom:.85rem}
+.foot-col h3{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-2);margin-bottom:.85rem;line-height:1.2}
 .foot-col ul{list-style:none;display:grid;gap:.4rem}
 .foot-col a{font-size:.95rem;text-decoration:none;color:var(--slate);min-height:32px;display:inline-flex;align-items:center}
 .foot-col a:hover{color:var(--teal);text-decoration:underline}
 .foot-col p{font-size:.95rem;color:var(--slate)}
 .foot-credo{grid-column:1/-1;color:var(--slate-2);font-style:italic;font-size:.95rem;max-width:70ch}
 .foot-bottom{border-top:1px solid var(--sand);padding-block:1.4rem;display:flex;flex-direction:column;gap:.5rem;font-size:.82rem;color:var(--slate-2)}
-.foot-bottom a{color:var(--slate-2)}
+.foot-bottom a{color:var(--slate-2);display:inline-flex;align-items:center;min-height:24px;padding-block:2px}
 @media (min-width:768px){.foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1024px){.foot-grid{grid-template-columns:1.5fr repeat(3,minmax(0,1fr))}.foot-bottom{flex-direction:row;justify-content:space-between;align-items:center}}
 
@@ -805,24 +822,24 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 <!-- ============ OVERLAY HEADER ============ -->
 <header class="topbar">
   <div class="wrap-wide topbar-inner">
-    <a class="logo" href="#top" aria-label="Steady Bridge Consulting"><img src="https://cdn.katalyst-crm.com/a/d0ed3446-75c4-de8b-690b-f7827631f3e2" alt="Steady Bridge Consulting"></a>
+    <a class="logo" href="#top" aria-label="Steady Bridge Consulting"><img src="https://dashboard.katalyst-crm.com/files/t1/Ekran%20Resmi%202026-08-29%2000.20.43%201%201.png" alt="Steady Bridge Consulting" width="200" height="65"></a>
     <nav class="nav-desktop" aria-label="Main">
-      <a href="#method">The SPACE Method</a>
+      <a href="#method">The SPACE Method™</a>
       <a href="#offers">Offers</a>
       <a href="#about">About</a>
-      <a href="https://steadybridgeconsulting.com/space-score">Free SPACE Score</a>
+      <a href="https://space-score.steadybridgeconsulting.com">Free SPACE Score™</a>
     </nav>
-    <a class="btn topbar-cta" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
+    <a class="btn topbar-cta" href="https://space-score.steadybridgeconsulting.com">Take the SPACE Score™</a>
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-  <a href="#method">The SPACE Method</a>
+  <a href="#method">The SPACE Method™</a>
   <a href="#offers">Offers</a>
   <a href="#about">About</a>
-  <a href="https://steadybridgeconsulting.com/space-score">Free SPACE Score</a>
-  <a class="btn btn-primary" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
+  <a href="https://space-score.steadybridgeconsulting.com">Free SPACE Score™</a>
+  <a class="btn btn-primary" href="https://space-score.steadybridgeconsulting.com">Take the SPACE Score™</a>
 </nav>
 
 <main>
@@ -830,9 +847,9 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
     <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-photo" aria-hidden="true" id="heroPhoto1" style="background-image:url('https://cdn.katalyst-crm.com/a/6e388cdc-5d3e-9e49-6c7c-796e343a0820')"></div>
-    <div class="hero-photo hero-photo-2" aria-hidden="true" id="heroPhoto2" style="background-image:url('https://cdn.katalyst-crm.com/a/8ff81f30-ffdf-2e5d-acd3-2890ecac20f4')"></div>
-    <div class="hero-photo hero-photo-3" aria-hidden="true" id="heroPhoto3" style="background-image:url('https://cdn.katalyst-crm.com/a/1ed277e9-264c-0210-b4fe-b8f0c606f9e9')"></div>
+    <div class="hero-photo" aria-hidden="true" id="heroPhoto1" style="background-image:url('https://cdn.katalyst-crm.com/a/cf5caa90-39ea-01bf-537c-a4e97bcbe366')"></div>
+    <div class="hero-photo hero-photo-2" aria-hidden="true" id="heroPhoto2" style="background-image:url('https://cdn.katalyst-crm.com/a/f1f310ef-651a-919d-9988-1f0d97fde99c')"></div>
+    <div class="hero-photo hero-photo-3" aria-hidden="true" id="heroPhoto3" style="background-image:url('https://cdn.katalyst-crm.com/a/493b2da6-c7a5-6db4-1f93-b7002e719752')"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="wrap-wide hero-grid">
       <div class="hero-inner">
@@ -842,9 +859,9 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         <p class="hero-built">Built by an engineer who became the bottleneck in his own company, then took the failure apart.</p>
         <div class="hero-cta">
           <div class="hero-cta-row">
-            <a class="btn btn-primary" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
+            <a class="btn btn-primary" href="https://space-score.steadybridgeconsulting.com">Take the SPACE Score™</a>
           </div>
-          <p class="risk-note">Twenty minutes, twenty-five questions, one score out of 100. The room doesn&rsquo;t come back on its own.</p>
+          <p class="risk-note">Three minutes, twenty-five questions, one score out of 100. The room doesn&rsquo;t come back on its own.</p>
         </div>
       </div>
     </div>
@@ -855,7 +872,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     <div class="wrap section-inner">
       <div class="rec-cols">
         <div class="rec-side">
-          <aside class="rec-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/4cda972b-6bae-c636-1ef1-edbe4e5f92ed');"></aside>
+          <aside class="rec-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/b3e77135-6891-6ebe-bd57-ca66a3c06611');"></aside>
           <p class="rec-punchline-inline">Here is what none of it addressed. Delegation is not the fix. Delegation is what becomes possible after the fix.</p>
         </div>
         <div class="rec-body">
@@ -912,13 +929,13 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   <section class="section method" id="method">
     <div class="wrap section-inner">
       <div class="row-head">
-        <span class="eyebrow">The SPACE Method</span>
+        <span class="eyebrow">The SPACE Method™</span>
         <h2>Five places the room goes.</h2>
         <p class="lede">Most owners are not losing room in all five. That is the useful part.</p>
       </div>
 
       <div class="method-cols">
-        <div class="method-illustration" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/d05ffa72-36ba-8fc2-0cf7-80dc2e019910');"></div>
+        <div class="method-illustration" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/d2a6e84b-9935-0580-74b3-e7e8a4b8261a');"></div>
 
         <div class="method-body">
           <div class="dim-list">
@@ -994,8 +1011,8 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
       </div>
 
       <div class="method-cta">
-        <!-- SPACE Score diagnostic: replace href with the live self-serve diagnostic URL -->
-        <a class="btn btn-teal" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score — Free</a>
+        <!-- SPACE Score™ diagnostic: replace href with the live self-serve diagnostic URL -->
+        <a class="btn btn-teal" href="https://space-score.steadybridgeconsulting.com">Take the SPACE Score™ — Free</a>
       </div>
     </div>
   </section>
@@ -1005,7 +1022,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     <div class="wrap section-inner">
       <div class="vs-cols">
         <div class="vs-side">
-          <aside class="vs-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/5610b4cb-a5cc-d971-1094-b77c2ac932b5');"></aside>
+          <aside class="vs-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/97d49adb-9711-6c2e-9502-02502b44f586');"></aside>
           <p class="disclaimer">Every number you see in a Leverage Map comes from your own inputs, and it comes as a range, labelled estimated. I do not promise overnight change, autonomous AI, or results without your team doing work. Conservative math is not modesty. It is the only kind you can plan against.</p>
         </div>
         <div class="vs-body-col">
@@ -1083,7 +1100,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         </div>
       </div>
 
-      <p class="trust-line">Owner-led companies in construction, HVAC, transport and professional services.</p>
+      <p class="trust-line">Founder-led companies in home services, construction and professional services.</p>
     </div>
   </section>
 
@@ -1096,7 +1113,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         <p class="about-lede">If the most motivated person in the room ends up owner-dependent anyway, then motivation is not the failure point. The structure is.</p>
       </div>
       <div class="about-cols">
-        <div class="about-panel" style="background-image:url('https://cdn.katalyst-crm.com/a/44ef8668-7a42-f536-c341-bbe8f09a1970');background-size:cover;background-position:center top;">
+        <div class="about-panel" style="background-image:url('https://dashboard.katalyst-crm.com/files/t1/Aragon-Confident-hand-placement.jpeg');background-size:cover;background-position:center top;">
           <div class="founder-card">
             <div class="founder-card-name">Kevin Smith</div>
             <div class="founder-card-role">Founder, Steady Bridge Consulting</div>
@@ -1112,7 +1129,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
             <div class="inner-more">
               <p>Somewhere in there I stopped enjoying it. That is the part nobody says out loud. You can be proud of a business and quietly relieved when a client cancels.</p>
               <p>That is when it stopped being a personal failing and became an engineering problem. So I traced it the way I would trace any system failing under load. It breaks in five specific places.</p>
-              <p class="pull">Systems. Priorities. Automation. Capacity. Energy. That teardown became the SPACE Method.</p>
+              <p class="pull">Systems. Priorities. Automation. Capacity. Energy. That teardown became the SPACE Method™.</p>
             </div>
           </div>
           <button class="story-toggle" id="storyToggle" aria-expanded="false" aria-controls="storyMore">Read more</button>
@@ -1126,12 +1143,15 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     <div class="wrap section-inner">
       <div class="iho-cols">
         <div class="iho-video" id="ihoVideo">
-          <img class="iho-cover" src="https://cdn.katalyst-crm.com/a/12b5e36c-fc7b-4d2b-7e19-5bf96a67d967" alt="Kevin Smith speaking to camera" aria-hidden="true">
+          <img class="iho-cover" src="https://cdn.katalyst-crm.com/a/99a56321-9138-3717-6bb8-482b22b64cad" alt="Kevin Smith — watch the video">
+          <button class="iho-play" aria-label="Play video">
+            <svg viewBox="0 0 68 68" fill="none"><circle cx="34" cy="34" r="33" stroke="#fff" stroke-width="2" opacity=".85"/><polygon points="27,20 27,48 50,34" fill="#fff"/></svg>
+          </button>
         </div>
         <div class="iho-body">
           <span class="eyebrow">In His Own Words</span>
           <p class="iho-quote">It turns out you can know exactly what your time is worth and still build a business that takes all of it.</p>
-          <p class="iho-desc">Sixty seconds from Kevin on the shift from operator to conductor &mdash; the failure point that became the SPACE Method.</p>
+          <p class="iho-desc">Sixty seconds from Kevin on the shift from operator to conductor &mdash; the failure point that became the SPACE Method™.</p>
           <div class="iho-link">
             <a class="btn btn-teal" href="https://youtube.com/shorts/cXB4joHuqvE" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
           </div>
@@ -1143,7 +1163,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   <!-- ============ MISSION ============ -->
   <section class="section mission">
     <div class="wrap section-inner">
-      <div class="mission-hero" style="background-image:url('https://cdn.katalyst-crm.com/a/231b0752-e173-82c4-5e61-ae1e61fd27a6');">
+      <div class="mission-hero" style="background-image:url('https://cdn.katalyst-crm.com/a/262cdb50-e15d-8e19-0ff7-d28079ae2f4e');">
         <div class="mission-hero-scrim" aria-hidden="true"></div>
         <div class="mission-hero-copy">
           <span class="mission-eyebrow">Mission</span>
@@ -1167,7 +1187,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
   <!-- ============ TESTIMONIALS (dark slider) ============ -->
   <section class="tslider-section" aria-roledescription="carousel" aria-label="Client testimonials">
-    <div class="tslider-bg" aria-hidden="true" style="background-image:linear-gradient(105deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.5) 55%,rgba(15,12,10,.35) 100%),url('https://cdn.katalyst-crm.com/a/95a1be1c-dbdf-04fc-1462-db7b4900626f');background-size:cover;background-position:center top;"></div>
+    <div class="tslider-bg" aria-hidden="true" style="background-image:linear-gradient(105deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.5) 55%,rgba(15,12,10,.35) 100%),url('https://cdn.katalyst-crm.com/a/dfdb111c-adea-f753-a1e5-0cf5ebd3e425');background-size:cover;background-position:center top;"></div>
     <div class="wrap section-inner">
       <span class="eyebrow">In their words</span>
       <div class="tslider-viewport">
@@ -1192,7 +1212,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
               <span class="tavatar" aria-hidden="true">DT</span>
               <figcaption>Danny Targonski<span>Owner Partner, Welcome Home</span></figcaption>
             </div>
-            <blockquote>&ldquo;Steady Bridge Consulting did a great job helping me identify the visual deficiencies within my business&rsquo;s online presence. We are working together to remap everything to ensure the client experience is seamless when looking for our services. Without Kevin and the team at Steady Bridge, we wouldn&rsquo;t have identified this as an issue!&rdquo;</blockquote>
+            <blockquote>&ldquo;Steady Bridge Consulting did a great job helping me identify the visual deficiencies within my business&rsquo;s online presence &mdash; including why we weren&rsquo;t showing up when the people we want as clients go looking through AI for a business like ours. We are working together to remap everything so the client experience is seamless when looking for our services. Without Kevin and the team at Steady Bridge, we wouldn&rsquo;t have identified this as an issue!&rdquo;</blockquote>
           </figure>
         </div>
       </div>
@@ -1215,7 +1235,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
       <div class="offer-grid">
         <article class="offer">
-          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/42dad303-4de8-85a7-7c4e-2282589849af');">
+          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/6ef273d2-d1d8-247f-83a4-2b026662cef1');">
             <div class="offer-header-scrim" aria-hidden="true"></div>
             <h3 class="offer-name">SPACE Intensive</h3>
           </div>
@@ -1233,7 +1253,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         </article>
 
         <article class="offer is-featured">
-          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/9177f4f1-6a5a-f2df-cb44-233a09566dad');">
+          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/255e841e-2370-ba09-2c50-ec5c3e10d869');">
             <div class="offer-header-scrim" aria-hidden="true"></div>
             <span class="offer-badge">Most chosen</span>
             <h3 class="offer-name">SPACE Advisory</h3>
@@ -1252,7 +1272,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
         </article>
 
         <article class="offer">
-          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/d500dbed-0b49-a793-5909-f5c573d5ee2a');">
+          <div class="offer-header" style="background-image:url('https://cdn.katalyst-crm.com/a/30b9f36c-4b2b-7aa1-2a18-7f321c7f0106');">
             <div class="offer-header-scrim" aria-hidden="true"></div>
             <h3 class="offer-name">SPACE Accelerator</h3>
           </div>
@@ -1272,7 +1292,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
       <p class="offers-close" style="text-align:center;margin-inline:auto;">You do not need to know which one is yours. That is what the Score is for. Take the Score, get your number, and if the honest recommendation is the $897 seat, that is what I will tell you.</p>
       <div class="offers-cta" style="display:flex;justify-content:center;">
-        <a class="btn btn-primary" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
+        <a class="btn btn-primary" href="https://space-score.steadybridgeconsulting.com">Take the SPACE Score™</a>
       </div>
     </div>
   </section>
@@ -1282,7 +1302,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     <div class="wrap section-inner">
       <div class="obj-cols">
         <div class="obj-side">
-          <aside class="obj-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/6138aa82-bc6a-3e64-b60e-1d9230be3a75');"></aside>
+          <aside class="obj-photo" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/bdf9e132-7b4b-e751-b700-5e02d8d77d31');"></aside>
           <div class="not-for">
             <h3><span class="badge" aria-hidden="true"></span>Who this is not for</h3>
             <ul>
@@ -1315,7 +1335,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
             <span class="faq-toggle" aria-hidden="true"></span>
           </summary>
           <div class="faq-body">
-            <p>Neither do I. The SPACE Score does not add tools. It finds where your time, your capacity, and your team&rsquo;s attention are being consumed, and a fair amount of what it surfaces gets fixed by removing something rather than buying something.</p>
+            <p>Neither do I. The SPACE Score™ does not add tools. It finds where your time, your capacity, and your team&rsquo;s attention are being consumed, and a fair amount of what it surfaces gets fixed by removing something rather than buying something.</p>
           </div>
         </details>
         <details class="faq-item">
@@ -1325,7 +1345,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
             <span class="faq-toggle" aria-hidden="true"></span>
           </summary>
           <div class="faq-body">
-            <p>It is not going to be. The room does not come back on its own, and the cost compounds quietly: the hire you cannot onboard because you have no time to train them, the client you cannot take because the week has no give in it, the day off you keep not taking. Twenty minutes and a score you can take right now is a small thing to spend to find out how much that is actually running you.</p>
+            <p>It is not going to be. The room does not come back on its own, and the cost compounds quietly: the hire you cannot onboard because you have no time to train them, the client you cannot take because the week has no give in it, the day off you keep not taking. Three minutes and a score you can take right now is a small thing to spend to find out how much that is actually running you.</p>
           </div>
         </details>
         <details class="faq-item">
@@ -1335,7 +1355,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
             <span class="faq-toggle" aria-hidden="true"></span>
           </summary>
           <div class="faq-body">
-            <p>Because the first thing you get is a number, not a program. The Score costs you ten minutes and no money, and you keep the result whether or not you ever work with me. And the Intensive is built so the target must be finishable inside one session, which means you experience a completed improvement before anything larger is on the table.</p>
+            <p>Because the first thing you get is a number, not a program. The Score costs you three minutes and no money, and you keep the result whether or not you ever work with me. And the Intensive is built so the target must be finishable inside one session, which means you experience a completed improvement before anything larger is on the table.</p>
           </div>
         </details>
         <details class="faq-item">
@@ -1356,11 +1376,11 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
   <!-- ============ CLOSING (tall dark band) ============ -->
   <section class="closing" id="contact">
-    <div class="closing-bg" aria-hidden="true" style="background-image:url('https://cdn.katalyst-crm.com/a/51a5c4fe-bd27-d971-0e20-3db0767f89f3')"></div>
+    <div class="closing-bg" aria-hidden="true" style="background-image:url('https://dashboard.katalyst-crm.com/files/t1/hf_20260828_113613_0ec03b73-4fc6-4c0b-9a5c-4b0c4c64a02d%201.png')"></div>
     <div class="closing-scrim" aria-hidden="true"></div>
     <div class="wrap-wide section-inner">
       <h2>You built something worth leading.<br>Take the room back.</h2>
-      <p>Twenty minutes, one number, and a straight answer about where your room is going. Not so the week is calmer, though it will be. So the business can grow past the size of your attention, and so you can enjoy owning the thing you built.</p>
+      <p>Three minutes, one number, and a straight answer about where your room is going. Not so the week is calmer, though it will be. So the business can grow past the size of your attention, and so you can enjoy owning the thing you built.</p>
       <ul>
         <li>Your score out of 100, dimension by dimension</li>
         <li>The single place you are losing the most room, named</li>
@@ -1369,9 +1389,9 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
       </ul>
       <div class="hero-cta">
         <div class="hero-cta-row">
-          <a class="btn btn-primary" href="https://steadybridgeconsulting.com/space-score">Take the SPACE Score</a>
+          <a class="btn btn-primary" href="https://space-score.steadybridgeconsulting.com">Take the SPACE Score™</a>
         </div>
-        <p class="risk-note">The room doesn&rsquo;t come back on its own. Twenty minutes is a small thing to spend to find out how much it&rsquo;s running you.</p>
+        <p class="risk-note">The room doesn&rsquo;t come back on its own. Three minutes is a small thing to spend to find out how much it&rsquo;s running you.</p>
       </div>
     </div>
   </section>
@@ -1382,27 +1402,27 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 <footer>
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <img class="foot-logo" src="https://cdn.katalyst-crm.com/a/d0ed3446-75c4-de8b-690b-f7827631f3e2" alt="Steady Bridge Consulting">
+      <img class="foot-logo" src="https://dashboard.katalyst-crm.com/files/t1/Ekran%20Resmi%202026-08-29%2000.20.43%201%201.png" alt="Steady Bridge Consulting" width="271" height="88">
       <p class="tagline">Creating SPACE for leaders.<br>SPACE over strain. Systems over dependence.</p>
     </div>
     <div class="foot-col">
-      <h4>Contact</h4>
+      <h3>Contact</h3>
       <ul>
-        <li><a href="mailto:kevin@steadybridgeconsulting.com">kevin@steadybridgeconsulting.com</a></li>
+        <li><a href="mailto:contact@steadybridgeconsulting.com">contact@steadybridgeconsulting.com</a></li>
         <li><a href="tel:+16502425327">(650) 242-5327</a></li>
       </ul>
     </div>
     <div class="foot-col">
-      <h4>Location</h4>
+      <h3>Location</h3>
       <p>Fort Worth, TX<br>Serving clients remotely</p>
     </div>
     <div class="foot-col">
-      <h4>Site Map</h4>
+      <h3>Site Map</h3>
       <ul>
-        <li><a href="#method">The SPACE Method</a></li>
+        <li><a href="#method">The SPACE Method™</a></li>
         <li><a href="#offers">Offers</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="https://steadybridgeconsulting.com/space-score">Free SPACE Score</a></li>
+        <li><a href="https://space-score.steadybridgeconsulting.com">Free SPACE Score™</a></li>
       </ul>
     </div>
     <p class="foot-credo">You can know exactly what your time is worth and still build a business that takes all of it. That&rsquo;s why the method exists.</p>
@@ -1415,6 +1435,17 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
 <script>
 (function(){
+  /* ---- fixed header: solid background once scrolled ---- */
+  var topbar=document.querySelector('.topbar');
+  function syncHeader(){
+    if(!topbar) return;
+    var scrolled = window.pageYOffset > 24;
+    var menuOpen = document.getElementById('mobileMenu') && document.getElementById('mobileMenu').classList.contains('open');
+    topbar.classList.toggle('scrolled', scrolled || menuOpen);
+  }
+  window.addEventListener('scroll', syncHeader, {passive:true});
+  window.addEventListener('resize', syncHeader);
+
   /* ---- mobile menu ---- */
   var btn=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu'),mq=window.matchMedia('(min-width:1024px)');
   function setOpen(open){
@@ -1423,6 +1454,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     btn.setAttribute('aria-expanded',String(open));
     btn.setAttribute('aria-label',open?'Close menu':'Open menu');
     document.body.classList.toggle('menu-locked',open);
+    syncHeader();
   }
   btn.addEventListener('click',function(){setOpen(!menu.classList.contains('open'));});
   menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setOpen(false);});});
@@ -1474,35 +1506,23 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     go(0);
   }
 
-  /* ---- inline player, no autoplay; YouTube shows its own controls on hover ----
-     The player is only created once the section scrolls into view, so the
-     YouTube payload is not fetched for visitors who never reach it. The
-     cover image stays underneath until the iframe is up. */
+  /* ---- video click-to-play ---- */
   var ihoEl = document.getElementById('ihoVideo');
   if(ihoEl){
-    var VID = 'cXB4joHuqvE';
+    var playBtn = ihoEl.querySelector('.iho-play');
+    var cover = ihoEl.querySelector('.iho-cover');
     function launchVideo(){
-      if(ihoEl.classList.contains('is-loaded')) return;
-      ihoEl.classList.add('is-loaded');
+      ihoEl.classList.add('is-playing');
       var ifr = document.createElement('iframe');
-      ifr.src = 'https://www.youtube.com/embed/' + VID +
-                '?controls=1&playsinline=1&rel=0&modestbranding=1';
+      ifr.src = 'https://www.youtube.com/embed/cXB4joHuqvE?autoplay=1';
       ifr.title = 'Kevin Smith — Steady Bridge Consulting';
       ifr.setAttribute('frameborder','0');
       ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
       ifr.setAttribute('allowfullscreen','');
       ihoEl.appendChild(ifr);
     }
-    if('IntersectionObserver' in window){
-      var ihoIO = new IntersectionObserver(function(entries){
-        entries.forEach(function(en){
-          if(en.isIntersecting){ launchVideo(); ihoIO.unobserve(en.target); }
-        });
-      }, {rootMargin:'200px 0px'});
-      ihoIO.observe(ihoEl);
-    } else {
-      launchVideo();
-    }
+    if(playBtn) playBtn.addEventListener('click', launchVideo);
+    if(cover) cover.addEventListener('click', launchVideo);
   }
 
   /* ---- hero photo carousel ---- */
@@ -1640,6 +1660,9 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
       });
     });
   });
+
+  /* ---- initialize header state on load ---- */
+  syncHeader();
 })();
 </script>
 </body>
