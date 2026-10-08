@@ -845,47 +845,44 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   }
   .hero-grid{padding-block-start:48vh}
 
-  /* ---- Mission: photo anchored to the top, solid fill below ---- */
+  /* ---- Mission: back to a full-cover photo + gradient overlay (no fixed
+     band height) — content height is driven by the text, not the image. ---- */
   .mission-hero{
-    background-position:top center;
-    background-size:100% 60vh;
+    background-size:cover;
+    background-position:62% top;
     background-repeat:no-repeat;
-    background-color:#0f0c0a;
-  }
-  /* .mission-hero-copy lives inside .mission-hero itself, so the photo can't
-     be masked directly (that would fade the text too) — use a positioned
-     overlay instead, sized to the same 60vh image region, sitting above the
-     scrim but below the copy (z-index:1) so it blends the image's bottom
-     edge into solid #0f0c0a without touching the text. */
-  .mission-hero::after{
-    content:"";position:absolute;left:0;right:0;top:0;height:60vh;z-index:0;
-    background:linear-gradient(180deg,transparent 0,transparent 70%,#0f0c0a 100%);
-    pointer-events:none;
   }
   .mission-hero-scrim{
-    background:linear-gradient(to bottom,
+    background:linear-gradient(180deg,
       rgba(15,12,10,0) 0%,
-      rgba(15,12,10,.2) 45%,
-      rgba(15,12,10,.95) 65%,
-      #0f0c0a 100%);
+      rgba(15,12,10,.15) 22%,
+      rgba(15,12,10,.8) 42%,
+      rgba(15,12,10,.92) 100%);
   }
-  .mission-hero-copy{padding-top:62vh}
+  .mission-hero-copy{padding-top:240px}
 
-  /* ---- Testimonials: photo is now a band at the top instead of
-     full-bleed, so the face and the quote text no longer compete for
-     the same space. The gradient layer is sized/positioned to cover
-     only the lower (text) portion, leaving the photo band itself clear. */
+  /* ---- Testimonials: back to a full-cover photo + gradient overlay
+     (no fixed band height) — content height is driven by the text. ---- */
   .tslider-bg{
     background-image:
-      linear-gradient(180deg,rgba(15,12,10,0) 0%,rgba(15,12,10,.92) 100%),
+      linear-gradient(180deg,
+        rgba(15,12,10,.05) 0%,
+        rgba(15,12,10,.2) 25%,
+        rgba(15,12,10,.85) 48%,
+        rgba(15,12,10,.94) 100%),
       url('https://cdn.katalyst-crm.com/a/dfdb111c-adea-f753-a1e5-0cf5ebd3e425');
-    background-repeat:no-repeat,no-repeat;
-    background-size:100% calc(100% - 45vh),100% 45vh;
-    background-position:0 100%,75% top;
-    background-color:#0f0c0a;
+    background-size:cover,cover;
+    background-position:0 0,70% top;
+    background-repeat:no-repeat;
   }
-  .tslider-section .section-inner{padding-top:38vh}
+  .tslider-section .section-inner{padding-top:300px}
   .tslide blockquote{max-width:75%}
+  /* align-items:flex-start is already set globally on .tslider-track, but on
+     its own that only stops short slides from being vertically centered or
+     stretched — the viewport box itself still defaults to the tallest
+     slide's height. JS below sets an explicit height on the active slide's
+     viewport on mobile; this transition just makes that change smooth. */
+  .tslider-viewport{transition:height .3s ease}
 
   /* ---- Closing: photo anchored top-right-of-center, solid fill below,
      content pushed down so the face clears the headline. .closing itself
@@ -918,8 +915,6 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
      where 58-60vh of photo would leave too little room for the headline */
   .hero-photo{height:54vh}
   .hero-grid{padding-block-start:44vh}
-  .mission-hero{background-size:100% 54vh}
-  .mission-hero-copy{padding-top:56vh}
   .closing-bg{background-size:100% 54vh}
   .closing .section-inner{padding-top:40vh}
 }
@@ -1602,6 +1597,8 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   if(track){
     var slides=track.children,total=slides.length,i=0;
     var dots=document.getElementById('tDots');
+    var viewport=track.closest('.tslider-viewport');
+    var tsliderMobileMql=window.matchMedia('(max-width:768px)');
     for(var d=0;d<total;d++){
       var b=document.createElement('button');
       b.className='tdot';b.setAttribute('role','tab');
@@ -1609,15 +1606,26 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
       (function(idx){b.addEventListener('click',function(){go(idx);});})(d);
       dots.appendChild(b);
     }
+    function syncViewportHeight(){
+      if(!viewport) return;
+      if(tsliderMobileMql.matches){
+        viewport.style.height=slides[i].scrollHeight+'px';
+      } else {
+        viewport.style.height='';
+      }
+    }
     function go(n){
       i=(n+total)%total;
       track.style.transform='translateX(-'+(i*100)+'%)';
       var all=dots.children;
       for(var k=0;k<all.length;k++)all[k].setAttribute('aria-selected',String(k===i));
+      syncViewportHeight();
     }
     document.getElementById('tNext').addEventListener('click',function(){go(i+1);});
     document.getElementById('tPrev').addEventListener('click',function(){go(i-1);});
     go(0);
+    window.addEventListener('resize',syncViewportHeight);
+    (tsliderMobileMql.addEventListener?tsliderMobileMql.addEventListener('change',syncViewportHeight):tsliderMobileMql.addListener(syncViewportHeight));
   }
 
   /* ---- video click-to-play ---- */
