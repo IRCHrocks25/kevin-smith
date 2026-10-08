@@ -516,7 +516,11 @@ body.menu-locked{overflow:hidden}
 
 /* ============ TESTIMONIAL SLIDER ============ */
 .tslider-section{position:relative;overflow:hidden;isolation:isolate;background:var(--espresso);border-bottom:1px solid var(--sand)}
-.tslider-bg{position:absolute;inset:0;z-index:-2;background:radial-gradient(90% 120% at 15% 0%, #2c251d 0%, rgba(44,37,29,0) 55%),linear-gradient(160deg,var(--espresso),var(--espresso-2));background-position:center top}
+.tslider-bg{
+  position:absolute;inset:0;z-index:-2;
+  background-image:linear-gradient(105deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.5) 55%,rgba(15,12,10,.35) 100%),url('https://cdn.katalyst-crm.com/a/dfdb111c-adea-f753-a1e5-0cf5ebd3e425');
+  background-size:cover;background-position:center top;
+}
 .tslider-section .eyebrow{color:#E4C89A;border-bottom-color:#E4C89A}
 .tslider-viewport{overflow:hidden;margin-top:1.5rem}
 .tslider-track{display:flex;align-items:flex-start;transition:transform .55s cubic-bezier(.33,1,.68,1)}
@@ -829,6 +833,8 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   .hero-photo{
     inset:auto;top:0;left:0;right:0;height:58vh;
     background-position:var(--focus,70% 20%);
+    -webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 70%,transparent 100%);
   }
   .hero-scrim{
     background:linear-gradient(to bottom,
@@ -846,6 +852,16 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     background-repeat:no-repeat;
     background-color:#0f0c0a;
   }
+  /* .mission-hero-copy lives inside .mission-hero itself, so the photo can't
+     be masked directly (that would fade the text too) — use a positioned
+     overlay instead, sized to the same 60vh image region, sitting above the
+     scrim but below the copy (z-index:1) so it blends the image's bottom
+     edge into solid #0f0c0a without touching the text. */
+  .mission-hero::after{
+    content:"";position:absolute;left:0;right:0;top:0;height:60vh;z-index:0;
+    background:linear-gradient(180deg,transparent 0,transparent 70%,#0f0c0a 100%);
+    pointer-events:none;
+  }
   .mission-hero-scrim{
     background:linear-gradient(to bottom,
       rgba(15,12,10,0) 0%,
@@ -855,9 +871,15 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   }
   .mission-hero-copy{padding-top:62vh}
 
-  /* ---- Testimonials: shift the single background photo's focus
-     upward/off-center so the quote card no longer sits on the face ---- */
-  .tslider-bg{background-position:50% 12%}
+  /* ---- Testimonials: shift the photo right/down so the quote card no
+     longer sits on the face, and darken only the left side so the right
+     side (where the face now sits) stays visible. Quote width is also
+     capped so it can't creep across into the face area. ---- */
+  .tslider-bg{
+    background-image:linear-gradient(105deg,rgba(15,12,10,.85) 0%,rgba(15,12,10,.3) 70%),url('https://cdn.katalyst-crm.com/a/dfdb111c-adea-f753-a1e5-0cf5ebd3e425');
+    background-position:0 0,85% 20%;
+  }
+  .tslide blockquote{max-width:75%}
 
   /* ---- Closing: photo anchored top-right-of-center, solid fill below,
      content pushed down so the face clears the headline ---- */
@@ -866,6 +888,11 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
     background-size:100% 60vh;
     background-repeat:no-repeat;
     background-color:#0f0c0a;
+    /* absolute vh stops (not %) since this element's own box is the full,
+       content-driven section height, not just the 60vh image region —
+       percentages here would fade relative to the wrong (taller) box. */
+    -webkit-mask-image:linear-gradient(180deg,#000 0,#000 42vh,transparent 60vh);
+    mask-image:linear-gradient(180deg,#000 0,#000 42vh,transparent 60vh);
   }
   .closing-scrim{
     background:linear-gradient(to bottom,
@@ -1262,7 +1289,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
   <!-- ============ TESTIMONIALS (dark slider) ============ -->
   <section class="tslider-section" aria-roledescription="carousel" aria-label="Client testimonials">
-    <div class="tslider-bg" aria-hidden="true" style="background-image:linear-gradient(105deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.5) 55%,rgba(15,12,10,.35) 100%),url('https://cdn.katalyst-crm.com/a/dfdb111c-adea-f753-a1e5-0cf5ebd3e425');background-size:cover;"></div>
+    <div class="tslider-bg" aria-hidden="true"></div>
     <div class="wrap section-inner">
       <span class="eyebrow">In their words</span>
       <div class="tslider-viewport">
