@@ -516,7 +516,7 @@ body.menu-locked{overflow:hidden}
 
 /* ============ TESTIMONIAL SLIDER ============ */
 .tslider-section{position:relative;overflow:hidden;isolation:isolate;background:var(--espresso);border-bottom:1px solid var(--sand)}
-.tslider-bg{position:absolute;inset:0;z-index:-2;background:radial-gradient(90% 120% at 15% 0%, #2c251d 0%, rgba(44,37,29,0) 55%),linear-gradient(160deg,var(--espresso),var(--espresso-2))}
+.tslider-bg{position:absolute;inset:0;z-index:-2;background:radial-gradient(90% 120% at 15% 0%, #2c251d 0%, rgba(44,37,29,0) 55%),linear-gradient(160deg,var(--espresso),var(--espresso-2));background-position:center top}
 .tslider-section .eyebrow{color:#E4C89A;border-bottom-color:#E4C89A}
 .tslider-viewport{overflow:hidden;margin-top:1.5rem}
 .tslider-track{display:flex;align-items:flex-start;transition:transform .55s cubic-bezier(.33,1,.68,1)}
@@ -818,6 +818,75 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 @media (min-width:768px){.foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1024px){.foot-grid{grid-template-columns:1.3fr 1.3fr 1fr 1fr}.foot-bottom{flex-direction:row;justify-content:space-between;align-items:center}}
 
+/* ============ MOBILE FACE-VISIBILITY FIXES ============
+   On phones, several full-bleed photo sections were cropping or fully hiding
+   people's faces behind text. Each section below gets the same treatment:
+   the photo becomes a band pinned to one edge, fades into solid #0f0c0a,
+   and the text is pushed clear of the face. Desktop (≥769px) is untouched —
+   none of these rules exist outside this media query. */
+@media (max-width:768px){
+  /* ---- Hero: photo band at the top, text pushed below it ---- */
+  .hero-photo{
+    inset:auto;top:0;left:0;right:0;height:58vh;
+    background-position:var(--focus,70% 20%);
+  }
+  .hero-scrim{
+    background:linear-gradient(to bottom,
+      rgba(15,12,10,0) 0%,
+      rgba(15,12,10,.25) 45%,
+      rgba(15,12,10,.96) 68%,
+      #0f0c0a 100%);
+  }
+  .hero-grid{padding-block-start:48vh}
+
+  /* ---- Mission: photo anchored to the top, solid fill below ---- */
+  .mission-hero{
+    background-position:top center;
+    background-size:100% 60vh;
+    background-repeat:no-repeat;
+    background-color:#0f0c0a;
+  }
+  .mission-hero-scrim{
+    background:linear-gradient(to bottom,
+      rgba(15,12,10,0) 0%,
+      rgba(15,12,10,.2) 45%,
+      rgba(15,12,10,.95) 65%,
+      #0f0c0a 100%);
+  }
+  .mission-hero-copy{padding-top:62vh}
+
+  /* ---- Testimonials: shift the single background photo's focus
+     upward/off-center so the quote card no longer sits on the face ---- */
+  .tslider-bg{background-position:50% 12%}
+
+  /* ---- Closing: photo anchored top-right-of-center, solid fill below,
+     content pushed down so the face clears the headline ---- */
+  .closing-bg{
+    background-position:80% top;
+    background-size:100% 60vh;
+    background-repeat:no-repeat;
+    background-color:#0f0c0a;
+  }
+  .closing-scrim{
+    background:linear-gradient(to bottom,
+      rgba(15,12,10,0) 0%,
+      rgba(15,12,10,.25) 45%,
+      rgba(15,12,10,.95) 65%,
+      #0f0c0a 100%);
+  }
+  .closing .section-inner{padding-top:45vh}
+}
+@media (max-width:480px){
+  /* slightly shorter photo bands / less push-down on the smallest phones,
+     where 58-60vh of photo would leave too little room for the headline */
+  .hero-photo{height:54vh}
+  .hero-grid{padding-block-start:44vh}
+  .mission-hero{background-size:100% 54vh}
+  .mission-hero-copy{padding-top:56vh}
+  .closing-bg{background-size:100% 54vh}
+  .closing .section-inner{padding-top:40vh}
+}
+
 /* ============ SMALL-SCREEN REFINEMENTS ============ */
 @media (max-width:600px){
   .hero .btn,.closing .btn{width:100%}
@@ -852,9 +921,9 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
     <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-photo" aria-hidden="true" id="heroPhoto1" style="background-image:url('https://cdn.katalyst-crm.com/a/cf5caa90-39ea-01bf-537c-a4e97bcbe366')"></div>
-    <div class="hero-photo hero-photo-2" aria-hidden="true" id="heroPhoto2" style="background-image:url('https://cdn.katalyst-crm.com/a/f1f310ef-651a-919d-9988-1f0d97fde99c')"></div>
-    <div class="hero-photo hero-photo-3" aria-hidden="true" id="heroPhoto3" style="background-image:url('https://cdn.katalyst-crm.com/a/493b2da6-c7a5-6db4-1f93-b7002e719752')"></div>
+    <div class="hero-photo" aria-hidden="true" id="heroPhoto1" style="--focus:70% 20%;background-image:url('https://cdn.katalyst-crm.com/a/cf5caa90-39ea-01bf-537c-a4e97bcbe366')"></div>
+    <div class="hero-photo hero-photo-2" aria-hidden="true" id="heroPhoto2" style="--focus:70% 20%;background-image:url('https://cdn.katalyst-crm.com/a/f1f310ef-651a-919d-9988-1f0d97fde99c')"></div>
+    <div class="hero-photo hero-photo-3" aria-hidden="true" id="heroPhoto3" style="--focus:70% 20%;background-image:url('https://cdn.katalyst-crm.com/a/493b2da6-c7a5-6db4-1f93-b7002e719752')"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="wrap-wide hero-grid">
       <div class="hero-inner">
@@ -1193,7 +1262,7 @@ footer{background:var(--stone);border-top:1px solid var(--sand)}
 
   <!-- ============ TESTIMONIALS (dark slider) ============ -->
   <section class="tslider-section" aria-roledescription="carousel" aria-label="Client testimonials">
-    <div class="tslider-bg" aria-hidden="true" style="background-image:linear-gradient(105deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.5) 55%,rgba(15,12,10,.35) 100%),url('https://cdn.katalyst-crm.com/a/dfdb111c-adea-f753-a1e5-0cf5ebd3e425');background-size:cover;background-position:center top;"></div>
+    <div class="tslider-bg" aria-hidden="true" style="background-image:linear-gradient(105deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.5) 55%,rgba(15,12,10,.35) 100%),url('https://cdn.katalyst-crm.com/a/dfdb111c-adea-f753-a1e5-0cf5ebd3e425');background-size:cover;"></div>
     <div class="wrap section-inner">
       <span class="eyebrow">In their words</span>
       <div class="tslider-viewport">
